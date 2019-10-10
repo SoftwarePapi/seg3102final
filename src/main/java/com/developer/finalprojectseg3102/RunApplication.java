@@ -5,14 +5,20 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
 @SpringBootApplication
 public class RunApplication {
 
-	@RequestMapping("/")
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login() {
+        return "login";
+    }
+	
+	@RequestMapping(value = "/", method = RequestMethod.GET)
     public String index() {
-        return "Greetings from Spring Boot!";
+        return "index";
     }
 	
 	public static void main(String[] args) {
