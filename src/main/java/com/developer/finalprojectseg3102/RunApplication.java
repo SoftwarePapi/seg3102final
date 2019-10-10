@@ -11,11 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @SpringBootApplication
 public class RunApplication {
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index() {
-        return "index";
-    }
-	
 	public static void main(String[] args) {
 		SpringApplication.run(RunApplication.class, args);
 	}
