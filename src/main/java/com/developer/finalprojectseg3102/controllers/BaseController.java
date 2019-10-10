@@ -1,4 +1,4 @@
-package com.developer.finalprojectseg3102.controller;
+package com.developer.finalprojectseg3102.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +11,9 @@ public class BaseController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
     public String index() {
-        return "index"; //the return string is the name of the html file
+        return "index"; 
+        /*the return string is the name of the html file
+        remember to return login page if session detects not logged in */
     }
 	
 	@RequestMapping(value="/login")

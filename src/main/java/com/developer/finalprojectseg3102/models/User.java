@@ -1,4 +1,4 @@
-package com.developer.finalprojectseg3102.model;
+package com.developer.finalprojectseg3102.models;
 
 public class User {	
 	

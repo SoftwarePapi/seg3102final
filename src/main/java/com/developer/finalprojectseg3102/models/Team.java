@@ -1,7 +1,8 @@
-package com.developer.finalprojectseg3102.model;
+package com.developer.finalprojectseg3102.models;
 
 import java.util.List;
-import com.developer.finalprojectseg3102.model.User;
+
+import com.developer.finalprojectseg3102.models.User;
 
 public class Team {
 
