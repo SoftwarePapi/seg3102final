@@ -24,7 +24,7 @@
 			</div>
 
 	<!-- 
-	<form action="#" th:action="@{/login}" method="get" th:object="${User}">
+	<form action="#" " method="get" th:object="${User}">
 		<p>enter name</p>
 		<input type="text" th:name="name"> <input type="submit">
 	</form>
@@ -36,7 +36,7 @@
 	
 	-->
 			<!-- Login Form -->
-			<form action="#" method="post" th:object="${User}" autocomplete="off">
+			<form action="#" method="post" th:action="@{/login}" th:object="${User}" autocomplete="off">
 				<input type="text" id="login" class="second" th:name="username"
 					placeholder="login"> 
 					
@@ -51,6 +51,7 @@
 			<div id="formFooter">
 				<a class="underlineHover" href="#">Forgot Password?</a>
 			</div>
+			<div> <p> Current Logged-in User: </p> <p th:text="${username}"></p> </div>
 
 		</div>
 	</div>

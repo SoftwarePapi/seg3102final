@@ -16,11 +16,4 @@ public class BaseController {
         remember to return login page if session detects not logged in */
     }
 	
-	@RequestMapping(value="/login")
-	public String getLoginPage(@RequestParam(name = "name", required = false, defaultValue = "person")
-	String name, Model model) {
-		model.addAttribute("name", name);
-		return "login";
-		
-	}
 }
