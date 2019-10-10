@@ -8,6 +8,16 @@
 
 
 	<body>
+		
+
+	<form action="#" th:action="@{/login}" 
+		method="get" 
+		th:object="${User}">
+		<p> enter name </p>
+		<input type="text" th:name="name">
+		<input type="submit">
+	</form>
+	
 		<p th:if="${name != null}"> This page has a param called 'name', w/ a default value of 'person'. Try adding
 			a value as a parameter, like /login?name=world </p>
 		<p th:text="${name}"> </p>

@@ -11,7 +11,7 @@ public class BaseController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
     public String index() {
-        return "index";
+        return "index"; //the return string is the name of the html file
     }
 	
 	@RequestMapping(value="/login")
