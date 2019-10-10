@@ -10,11 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
 @SpringBootApplication
 public class RunApplication {
-
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login() {
-        return "login";
-    }
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
     public String index() {

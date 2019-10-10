@@ -8,7 +8,9 @@
 
 
 	<body>
-		<p th:text="login" />
+		<p th:if="${name != null}"> This page has a param called 'name', w/ a default value of 'person'. Try adding
+			a value as a parameter, like /login?name=world </p>
+		<p th:text="${name}"> </p>
 	</body>
 	
 </html>
