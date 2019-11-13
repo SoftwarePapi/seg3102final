@@ -59,6 +59,4 @@ public class Team {
 		this.section = section;
 	}
 	
-	
-	
 }
