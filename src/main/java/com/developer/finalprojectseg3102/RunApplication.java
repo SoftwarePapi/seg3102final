@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.sql.DataSource;
+import javax.websocket.Session;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -40,22 +42,23 @@ public class RunApplication {
 	}
 
 	@RequestMapping("/db")
-	String db(Map<String, Object> model) {
+	String db(Model model, Session session) {
 		try (Connection connection = dataSource.getConnection()) {
 			Statement stmt = connection.createStatement();
-			stmt.executeUpdate("CREATE TABLE IF NOT EXISTS ticks (tick timestamp)");
-			stmt.executeUpdate("INSERT INTO ticks VALUES (now())");
-			ResultSet rs = stmt.executeQuery("SELECT tick FROM ticks");
+			ResultSet rs = stmt.executeQuery("SELECT table_name\n" + 
+					"  FROM information_schema.tables\n" + 
+					" WHERE table_schema='public'\n" + 
+					"   AND table_type='BASE TABLE';");
 
 			ArrayList<String> output = new ArrayList<String>();
 			while (rs.next()) {
-				output.add("Read from DB: " + rs.getTimestamp("tick"));
+				output.add("Read from DB: " + rs.toString());
 			}
 
-			model.put("records", output);
-			return "db";
+			model.addAttribute("records", output);
+			return "test";
 		} catch (Exception e) {
-			model.put("message", e.getMessage());
+			model.addAttribute("message", e.getMessage());
 			return "error";
 		}
 	}
