@@ -42,7 +42,7 @@ public class RunApplication {
 	}
 
 	@RequestMapping("/db")
-	String db(Model model, Session session) {
+	String db(Model model) {
 		try (Connection connection = dataSource.getConnection()) {
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT table_name\n" + 
