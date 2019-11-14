@@ -52,7 +52,7 @@ public class RunApplication {
 
 			ArrayList<String> output = new ArrayList<String>();
 			while (rs.next()) {
-				output.add("Read from DB: " + rs.toString());
+				output.add("Read from DB: " + rs);
 			}
 
 			model.addAttribute("records", output);
