@@ -8,6 +8,9 @@ public class Comment {
     private User author;
     private Thread thread;
 
+    public Comment() {
+    }
+
     public Comment(String body_text, User author, Thread thread) {
         this.body_text = body_text;
         this.author = author;

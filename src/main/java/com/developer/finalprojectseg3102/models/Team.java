@@ -14,6 +14,9 @@ public class Team {
 	private int max_capacity;
 	private Section section;
 
+	public Team() {
+	}
+
 	public Team(String team_name, Timestamp creation_date, List<User> members, User captain, String status, int min_capacity, int max_capacity, Section section) {
 		this.team_name = team_name;
 		this.creation_date = creation_date;

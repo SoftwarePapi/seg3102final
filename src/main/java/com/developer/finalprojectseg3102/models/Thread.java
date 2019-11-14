@@ -9,6 +9,9 @@ public class Thread {
     private User author;
     private Team team;
 
+    public Thread() {
+    }
+
     public Thread(String title, String body_text, User author, Team team) {
         this.title = title;
         this.body_text = body_text;

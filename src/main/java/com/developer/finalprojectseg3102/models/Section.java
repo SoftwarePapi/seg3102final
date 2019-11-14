@@ -13,6 +13,9 @@ public class Section {
     private List<User> students;
 
 
+    public Section() {
+    }
+
     public Section(String section_name, Course course, User professor, List<User> students) {
         this.section_name = section_name;
         this.course = course;

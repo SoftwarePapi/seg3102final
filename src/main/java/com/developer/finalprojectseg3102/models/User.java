@@ -12,8 +12,11 @@ public class User {
 	private String program;
 	private String password;
 	private List<Team> teams;
-//	private List<Section> sections;
+	private List<Section> sections;
 
+
+	public User() {
+	}
 
 	public User(String firstName, String lastName, long identification_number, String email, String account_type, String program, String password, List<Team> teams) {
 		this.firstName = firstName;
