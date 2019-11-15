@@ -25,7 +25,7 @@ public class User {
 		this.email = email;
 		this.account_type = account_type;
 		this.program = program;
-		this.password = password;
+		this.setPassword(password);
 		this.teams = teams;
 	}
 
@@ -64,5 +64,13 @@ public class User {
 	}
 	public void setProgram(String program) {
 		this.program = program;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }
