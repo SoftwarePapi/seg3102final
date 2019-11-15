@@ -46,9 +46,7 @@ public class RunApplication {
 		try (Connection connection = dataSource.getConnection()) {
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT table_name\n" + 
-					"  FROM information_schema.tables\n" + 
-					" WHERE table_schema='public'\n" + 
-					"   AND table_type='BASE TABLE';");
+					"  FROM information_schema.tables\n");
 
 			ArrayList<String> output = new ArrayList<String>();
 			while (rs.next()) {
