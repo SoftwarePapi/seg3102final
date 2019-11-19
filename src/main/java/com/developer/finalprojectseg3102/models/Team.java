@@ -1,4 +1,4 @@
-package com.developer.finalprojectseg3102.models;
+/**package com.developer.finalprojectseg3102.models;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -62,4 +62,4 @@ public class Team {
 		this.section = section;
 	}
 	
-}
+}**/

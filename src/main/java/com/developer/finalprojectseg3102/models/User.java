@@ -1,4 +1,4 @@
-package com.developer.finalprojectseg3102.models;
+/**package com.developer.finalprojectseg3102.models;
 
 import java.util.List;
 
@@ -65,4 +65,4 @@ public class User {
 	public void setProgram(String program) {
 		this.program = program;
 	}
-}
+}**/
