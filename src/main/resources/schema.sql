@@ -8,7 +8,7 @@ DROP TABLE IF EXISTS Comments;
 DROP TABLE IF EXISTS Teams;
 
 CREATE TABLE Users (
-    user_id int NOT NULL,
+    user_id SERIAL,
     account_type varchar NOT NULL,
     first_name varchar NOT NULL,
     last_name varchar NOT NULL,
