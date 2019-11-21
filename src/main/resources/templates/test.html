@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Getting Started: Serving Web Content</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+
+<body>
+	
+	
+	<p>this is a positive test that the application deployed properly. please try the following: </p>
+	<a href="login"> login page </a>
+	
+	<ul th:each="record: ${records}">
+		<li><span th:utext="${record.toString()}"></span></li>
+	</ul>
+</body>
+
+</html>
