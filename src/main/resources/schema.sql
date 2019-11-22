@@ -20,7 +20,7 @@ CREATE TABLE Users (
 );
 
 CREATE TABLE Teams (
-    team_id int NOT NULL,
+    team_id SERIAL,
     team_name varchar NOT NULL,
     creation_date timestamp,
     captain int NOT NULL,
@@ -32,7 +32,7 @@ CREATE TABLE Teams (
 );
 
 CREATE TABLE team_members (
-    id int NOT NULL,
+    id SERIAL,
     team_id int NOT NULL,
     user_id int NOT NULL,
     PRIMARY KEY (id),
@@ -41,13 +41,13 @@ CREATE TABLE team_members (
 );
 
 CREATE TABLE Courses (
-    course_id int NOT NULL,
+    course_id SERIAL,
     course_code varchar NOT NULL,
     PRIMARY KEY (course_id)
 );
 
 CREATE TABLE Sections (
-    section_id int NOT NULL,
+    section_id SERIAL,
     section_name varchar NOT NULL,
     course_id int,
     professor int,
@@ -57,7 +57,7 @@ CREATE TABLE Sections (
 );
 
 CREATE TABLE section_students (
-    id int NOT NULL,
+    id SERIAL,
     section_id int NOT NULL,
     user_id int NOT NULL,
     PRIMARY KEY (id),
@@ -66,7 +66,7 @@ CREATE TABLE section_students (
 );
 
 CREATE TABLE Threads (
-    thread_id int NOT NULL,
+    thread_id SERIAL,
     title varchar,
     body_text varchar,
     author int NOT NULL,
@@ -77,7 +77,7 @@ CREATE TABLE Threads (
 );
 
 CREATE TABLE Comments (
-    comment_id int NOT NULL,
+    comment_id SERIAL,
     body_text varchar,
     author int NOT NULL,
     thread_id int NOT NULL,

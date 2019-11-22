@@ -34,12 +34,12 @@ public class UserDAO extends BaseDAO {
 			query.append(user.getLastName() + ", ");
 			query.append(user.getIdentificationNumber() + ", ");
 			if (user.getProgram()!=null || user.getProgram()!= "") {
-				query.append(user.getProgram() + QUERYEND);
+				query.append(user.getProgram() + ", ");
 			} else {
 				query.append(" " + ", ");
 			}
 			query.append(user.getEmail() + ", ");
-			query.append(user.getPassword() + ");");
+			query.append(user.getPassword() + QUERYEND);
 			
 			connection = dataSource.getConnection();
 			Statement stmt = connection.createStatement();
