@@ -8,7 +8,7 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.util.ArrayList;
-
+import java.util.HashMap;
 import java.util.Scanner;
 
 import org.json.simple.JSONArray;
@@ -19,6 +19,7 @@ import com.developer.finalprojectseg3102.models.User;
 
 
 public class UserDAO extends BaseDAO {
+	
 	
 	/* 
 	 * Implement CRUD, 
@@ -38,6 +39,7 @@ public class UserDAO extends BaseDAO {
 	public static void create(User user) throws Exception {
 		URL url = new URL("http://team-management-system.herokuapp.com/api/v1/users");
 		HttpURLConnection con = (HttpURLConnection)url.openConnection();
+		con.setDoOutput(true);
 		con.setRequestMethod("POST");
 		con.setRequestProperty("Content-Type", "application/json; utf-8");
 		con.setRequestProperty("Accept", "application/json");
@@ -75,7 +77,7 @@ public class UserDAO extends BaseDAO {
 	}
 	public static User retrieve(Integer id) throws Exception{
 
-		URL url = new URL("http://team-management-system.herokuapp.com/api/v1/users/" + id.toString()+"/?format=json");
+		URL url = new URL(BASEURLV1 + "users/");
 		HttpURLConnection con = (HttpURLConnection)url.openConnection();
 		con.setRequestMethod("GET");
 		con.connect();
@@ -112,9 +114,10 @@ public class UserDAO extends BaseDAO {
 
 	// TODO: Fix this
 	// DOESN'T WORK - there's an extra [ ] around the retrieve object, it's failing to parse it as a list
+	@SuppressWarnings("unchecked")
 	public static ArrayList<User> retrieveUsers() throws Exception{
 
-		URL url = new URL("http://team-management-system.herokuapp.com/api/v1/users/?format=json");
+		URL url = new URL(BASEURLV1 + "users/?format=json");
 		HttpURLConnection conn = (HttpURLConnection)url.openConnection();
 		conn.setRequestMethod("GET");
 		conn.connect();
@@ -132,20 +135,19 @@ public class UserDAO extends BaseDAO {
 			sc.close();
 			System.out.print("Raw Jason: ");
 			System.out.println(rawJson);
-			JSONParser parse = new JSONParser();
-			JSONObject jsonObj = (JSONObject)parse.parse(rawJson);
-			JSONArray jsonArray = new JSONArray();
-
-			jsonArray.add(jsonObj);
-
+			
+			JSONParser parser = new JSONParser();
+			JSONArray jsonArray = (JSONArray) parser.parse(rawJson);
 
 			ArrayList<User> users = new ArrayList<User>();
 			for(int i=0; i < jsonArray.size(); i++){
+				
+				//
 				JSONObject row = (JSONObject)jsonArray.get(i);
 				User user = new User();
 
 				// Create this method
-//				user.setUserId(row.get("user_id"));
+				//user.setUserId(row.get("user_id"));
 				user.setAccountType((String)row.get("account_type"));
 				user.setFirstName((String)row.get("first_name"));
 				user.setLastName((String)row.get("last_name"));
@@ -157,6 +159,7 @@ public class UserDAO extends BaseDAO {
 				System.out.println("First Name: "  + user.getFirstName());
 				users.add(user);
 			}
+			
 			System.out.println(users.toString());
 			return users;
 		}
