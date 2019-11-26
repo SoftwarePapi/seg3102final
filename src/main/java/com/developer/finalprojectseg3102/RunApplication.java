@@ -1,21 +1,33 @@
 package com.developer.finalprojectseg3102;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.developer.finalprojectseg3102.controllers.BaseController;
 
 @Controller
 @SpringBootApplication
-public class RunApplication {
+public class RunApplication extends BaseController{
 
 	public static void main(String[] args) {
 		SpringApplication.run(RunApplication.class, args);
 	}
 
 	@RequestMapping("/")
-	String index() {
-		return "index";
+	String index(Model model, HttpSession session) {
+		if (!isLoggedIn(session)) {
+			return "login";
+		} else {
+			return "index";
+		}
+		
 	}
+	
+	
 
 }

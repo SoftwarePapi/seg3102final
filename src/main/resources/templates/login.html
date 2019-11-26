@@ -17,16 +17,16 @@
 			<h2 class="active">Sign In</h2>
 			<h2 class="inactive underlineHover">Sign Up</h2>
 
-			<!-- Icon -->
-			<div class="fadeIn first">
+			
+			<!-- <div class="fadeIn first">
 				<img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon"
 					alt="User Icon" />
-			</div>
+			</div> -->
 
 			<!-- Login Form -->
-			<form action="#" method="post" th:action="@{/login}" th:object="${User}" autocomplete="off">
-				<input type="text" id="login" class="second" th:name="username"
-					placeholder="login"> 
+			<form action="#" method="post" th:action="@{/login-attempt}" th:object="${User}" autocomplete="off">
+				<input type="text" id="login" class="second" th:name="email"
+					placeholder="email"> 
 					
 				<input type="password" id="password"
 					class="third" th:name="password" placeholder="password"> 
