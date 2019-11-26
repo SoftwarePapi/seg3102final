@@ -41,28 +41,27 @@ public class LoginController extends BaseController {
 						if (user.getEmail().equals(userList.get(i).getEmail())
 								&& user.getPassword().equals(userList.get(i).getPassword())) {
 							session.setAttribute("loggedIn", true);
-							session.setAttribute("user", user);
+							User loggedInUser = new User();
+							loggedInUser.setAccountType(user.getAccountType());
+							loggedInUser.setEmail(user.getEmail());
+							loggedInUser.setFirstName(user.getFirstName());
+							loggedInUser.setIdentificationNumber(user.getIdentificationNumber());
+							loggedInUser.setLastName(user.getLastName());
+							loggedInUser.setPassword(user.getPassword());
+							loggedInUser.setProgram(user.getProgram());
+							loggedInUser.setUser_id(user.getUser_id());
+							session.setAttribute("user", loggedInUser);
 							break;
-							
+
 						}
-						/*
-						 * User loggedInUser = new User();
-						 * loggedInUser.setAccountType(user.getAccountType());
-						 * loggedInUser.setEmail(user.getEmail());
-						 * loggedInUser.setFirstName(user.getFirstName());
-						 * loggedInUser.setIdentificationNumber(user.getIdentificationNumber());
-						 * loggedInUser.setLastName(user.getLastName());
-						 * loggedInUser.setPassword(user.getPassword());
-						 * loggedInUser.setProgram(user.getProgram());
-						 * loggedInUser.setUser_id(user.getUser_id());
-						 */
+
 					}
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		//TODO Clean up login check in this method
+		// TODO Clean up login check in this method
 		if (isLoggedIn(session)) {
 			return "index";
 		} else {
