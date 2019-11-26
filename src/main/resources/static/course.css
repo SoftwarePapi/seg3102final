@@ -1,0 +1,36 @@
+
+.teamtitlestyle {
+  	color: #000000;
+    display: inline-block;
+	font-size: 25px;
+	padding-top: 1%;
+	padding-bottom: 1%;
+	padding-left: 5%;
+}
+
+.teamstyle {
+	color: #000000;
+    display: inline-block;
+	font-size: 20px;
+	padding-left: 7%;
+	padding-top: 1%;
+	padding-bottom: 2%;
+}
+
+.discussion{
+	color: #000000;
+    display: inline-block;
+	font-size: 25px;
+	padding-top: 1%;
+	padding-bottom: 1%;
+}
+
+.border{
+	border: 2px solid black;
+	height: 70%;
+}
+
+.padding{
+	padding-left: 5%;
+	padding-right: 5%;
+}
