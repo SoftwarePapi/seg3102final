@@ -31,7 +31,6 @@ public class LoginController extends BaseController {
 
 		try {
 			if (isLoggedIn(session)) {
-				System.out.println(user);
 				return "index";
 			} else {
 				ArrayList<User> userList = new ArrayList<User>();

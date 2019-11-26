@@ -58,7 +58,6 @@ public class UserDAO extends BaseDAO {
 
 		String jsonInputString = str.toString();
 
-		System.out.println(jsonInputString);
 		try(OutputStream os = con.getOutputStream()) {
 			byte[] input = jsonInputString.getBytes("utf-8");
 			os.write(input, 0, input.length);
@@ -70,8 +69,6 @@ public class UserDAO extends BaseDAO {
 			while ((responseLine = br.readLine()) != null) {
 				response.append(responseLine.trim());
 			}
-			System.out.println("Response:");
-			System.out.println(response);
 		}
 
 	}
@@ -155,12 +152,8 @@ public class UserDAO extends BaseDAO {
 				user.setProgram((String)row.get("program"));
 				user.setEmail((String)row.get("email"));
 				user.setPassword((String)row.get("password"));
-
-				System.out.println("First Name: "  + user.getFirstName());
 				users.add(user);
 			}
-			
-			System.out.println(users.toString());
 			return users;
 		}
 	}
