@@ -72,4 +72,14 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	public boolean isAdmin(){
+		return (this.account_type == "admin");
+	}
+	public boolean isStudent(){
+		return (this.account_type == "student");
+	}
+	public boolean isProfessor(){
+		return (this.account_type == "professor");
+	}
 }

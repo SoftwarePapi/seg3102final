@@ -10,5 +10,11 @@
 
         <input type="submit" value="Create Course">
     </form>
+
+    <h3>Course List</h3>
+    <tr th:each="course: ${courses}">
+        <td th:text="${course.getCourseCode()}" /><br>
+        <td
+    </tr>
 </body>
 </html>
