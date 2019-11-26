@@ -1,0 +1,24 @@
+.teamstyle {
+	color: #000000;
+    display: inline-block;
+	font-size: 22px;
+	padding-left: 0.5%;
+	padding-top: 1%;
+}
+
+.border{
+	border: 2px solid black;
+	height: 70%;
+}
+
+.commentpadding{
+	padding-top: 2%;
+	padding-left: 5%;
+	padding-right: 5%;
+}
+
+.padding{
+	padding-top: 1%;
+	padding-left: 6%;
+	padding-right: 5%;
+}

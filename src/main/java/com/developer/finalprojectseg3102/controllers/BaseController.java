@@ -6,7 +6,7 @@ public class BaseController {
 	
 	protected static Boolean isLoggedIn(HttpSession session) {
 		return 
-		session.getAttribute("loggedIn")== null || 
-		(session.getAttribute("loggedIn")== null && session.getAttribute("loggedIn").equals(false));
+		session.getAttribute("loggedIn")!= null || 
+		(session.getAttribute("loggedIn")!= null && session.getAttribute("loggedIn").equals(true));
 	}
 }
