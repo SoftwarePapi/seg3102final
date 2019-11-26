@@ -62,6 +62,7 @@ public class LoginController extends BaseController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		//TODO Clean up login check in this method
 		if (isLoggedIn(session)) {
 			return "index";
 		} else {
