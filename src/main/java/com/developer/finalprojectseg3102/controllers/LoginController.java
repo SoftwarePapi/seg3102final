@@ -64,6 +64,9 @@ public class LoginController extends BaseController {
 		}
 		//TODO Clean up login check in this method
 		if (isLoggedIn(session)) {
+			String name = user.getFirstName();
+			System.out.println(name);
+			model.addAttribute(name);
 			return "index";
 		} else {
 			return "login";
