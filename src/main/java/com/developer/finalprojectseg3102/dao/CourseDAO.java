@@ -2,6 +2,7 @@ package com.developer.finalprojectseg3102.dao;
 
 import com.developer.finalprojectseg3102.models.Course;
 import com.developer.finalprojectseg3102.models.User;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
@@ -28,38 +29,6 @@ public class CourseDAO extends BaseDAO {
     private final static String COLUMNS = "(course_code)";
     private final static String QUERYEND = ");";
 
-
-    public static void create(Course course) {
-        Connection connection;
-        try {
-            StringBuilder query = new StringBuilder();
-            query.append("INSERT INTO " + TABLENAME + COLUMNS + "VALUES (");
-            query.append(course.getCourseCode() + QUERYEND);
-            connection = dataSource.getConnection();
-            Statement stmt = connection.createStatement();
-            stmt.executeQuery(query.toString());
-            stmt.close();
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
-
-//    public static Course Retrieve(Integer course_id){
-//        Connection connection;
-//        try{
-//            StringBuilder query = new StringBuilder();
-//            query.append("SELECT *  FROM" + TABLENAME + "WHERE course_id=");
-//            query.append(course_id + QUERYEND);
-//            connection = dataSource.getConnection();
-//            Statement stmt = connection.createStatement();
-//            stmt.executeQuery(query.toString());
-//            stmt.close();
-//        }catch (Exception e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        }
-//    }
 
     public static Course retrieve(Integer id) throws Exception{
 
@@ -89,26 +58,41 @@ public class CourseDAO extends BaseDAO {
             return course;
         }
     }
-    public static List<Object> retrieveList() {
-        Connection connection;
-        try {
-            StringBuilder query = new StringBuilder();
-            query.append("SELECT * FROM " + TABLENAME);
-            connection = dataSource.getConnection();
-            Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery(query.toString());
-            stmt.close();
+    public static ArrayList<Course> retrieveCourses() throws Exception{
 
-            List<Object> usersList = new ArrayList<>();
-            //getString returns by column name
-            while(rs.next()) {
-                usersList.add(rs.getString("first_name"));
+        URL url = new URL(BASEURLV1 + "courses/?format=json");
+        HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+        conn.setRequestMethod("GET");
+        conn.connect();
+        int responseCode = conn.getResponseCode();
+
+        if(responseCode != 200){
+            throw new RuntimeException("HttpResponseCode: " + responseCode);
+        }
+        else{
+            String rawJson = new String();
+            Scanner sc = new Scanner(url.openStream());
+            while(sc.hasNext()){
+                rawJson += sc.nextLine();
             }
-            return usersList;
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return null; //TODO fix this, returning null is fucking stupid
+            sc.close();
+            JSONParser parser = new JSONParser();
+            JSONArray jsonArray = (JSONArray) parser.parse(rawJson);
+
+            ArrayList<Course> courses = new ArrayList<Course>();
+            for(int i=0; i < jsonArray.size(); i++){
+
+                //
+                JSONObject row = (JSONObject)jsonArray.get(i);
+                Course course = new Course();
+
+                // Create this method
+                //user.setUserId(row.get("user_id"));
+                course.setCourseCode((String)row.get("course_code"));
+
+                courses.add(course);
+            }
+            return courses;
         }
     }
 

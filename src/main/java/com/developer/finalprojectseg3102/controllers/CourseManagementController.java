@@ -23,9 +23,9 @@ public class CourseManagementController extends BaseController {
         if (isLoggedIn(session)){
             model.addAttribute(course);
 
-            if (course.getCourseCode() != null){
-                CourseDAO.create(course);
-            }
+//            if (course.getCourseCode() != null){
+//                CourseDAO.create(course);
+//            }
             return "admin-course";
         }
         else{

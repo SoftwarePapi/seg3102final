@@ -1,5 +1,7 @@
 package com.developer.finalprojectseg3102.models;
 
+import com.developer.finalprojectseg3102.dao.UserDAO;
+
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -9,6 +11,7 @@ public class Team {
 	private Timestamp creation_date;
 	private List<User> members;
 	private User captain;
+	private int captain_id;
 	private String status;
 	private int min_capacity;
 	private int max_capacity;
@@ -48,8 +51,9 @@ public class Team {
 	public void removeMember(User user){
 		members.remove(user);
 	}
-	public User getCaptain() {
-		return captain;
+	public User getCaptain() throws Exception {
+		User user = UserDAO.retrieve(this.getCaptain_id());
+		return user;
 	}
 	public void setCaptain(User captain) {
 		this.captain = captain;
@@ -61,5 +65,12 @@ public class Team {
 	public void setSection(Section section) {
 		this.section = section;
 	}
-	
+
+	public int getCaptain_id() {
+		return captain_id;
+	}
+
+	public void setCaptain_id(int captain_id) {
+		this.captain_id = captain_id;
+	}
 }

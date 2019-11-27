@@ -2,6 +2,7 @@ package com.developer.finalprojectseg3102;
 
 import javax.servlet.http.HttpSession;
 
+import com.developer.finalprojectseg3102.models.User;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,10 @@ public class RunApplication extends BaseController{
 		if (!isLoggedIn(session)) {
 			return "login";
 		} else {
+			User user = (User)session.getAttribute("user");
+			String name = user.getFirstName();
+			System.out.println(name);
+			model.addAttribute(name);
 			return "index";
 		}
 		

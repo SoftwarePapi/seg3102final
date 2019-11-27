@@ -33,26 +33,15 @@ public class LoginController extends BaseController {
 			if (isLoggedIn(session)) {
 				return "index";
 			} else {
-				ArrayList<User> userList = new ArrayList<User>();
-				userList = (ArrayList<User>) UserDAO.retrieveUsers();
+				ArrayList<User> userList = UserDAO.retrieveUsers();
 
 				for (int i = 0; i < userList.size(); i++) {
 					if (user.getEmail() != null && user.getPassword() != null) {
 						if (user.getEmail().equals(userList.get(i).getEmail())
 								&& user.getPassword().equals(userList.get(i).getPassword())) {
 							session.setAttribute("loggedIn", true);
-							User loggedInUser = new User();
-							loggedInUser.setAccountType(user.getAccountType());
-							loggedInUser.setEmail(user.getEmail());
-							loggedInUser.setFirstName(user.getFirstName());
-							loggedInUser.setIdentificationNumber(user.getIdentificationNumber());
-							loggedInUser.setLastName(user.getLastName());
-							loggedInUser.setPassword(user.getPassword());
-							loggedInUser.setProgram(user.getProgram());
-							loggedInUser.setUser_id(user.getUser_id());
-							session.setAttribute("user", loggedInUser);
+							session.setAttribute("user", userList.get(i));
 							break;
-
 						}
 
 					}
@@ -63,8 +52,8 @@ public class LoginController extends BaseController {
 		}
 		// TODO Clean up login check in this method
 		if (isLoggedIn(session)) {
-			String name = user.getFirstName();
-			System.out.println(name);
+			User current_user = (User) session.getAttribute("user");
+			String name = current_user.getFirstName();
 			model.addAttribute(name);
 			return "index";
 		} else {
