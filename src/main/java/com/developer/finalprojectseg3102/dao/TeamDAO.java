@@ -40,9 +40,16 @@ public class TeamDAO extends BaseDAO{
 
             Team team = new Team();
 
-            // Create this method
+            team.setTeam_id((Integer)jsonObj.get("team_id"));
             team.setTeamName((String)jsonObj.get("team_name"));
+            team.setCreation_date((Timestamp)jsonObj.get("creation_date"));
             team.setCaptain_id((Integer)jsonObj.get("captain"));
+            team.setStatus((String)jsonObj.get("status"));
+            team.setMin_capacity((Integer)jsonObj.get("min_capacity"));
+            team.setMax_capacity((Integer)jsonObj.get("max_capacity"));
+            //TODO: Add this column to table
+            team.setSection_id((Integer)jsonObj.get("section"));
+
             return team;
         }
     }
@@ -73,19 +80,20 @@ public class TeamDAO extends BaseDAO{
 
                 //
                 JSONObject row = (JSONObject)jsonArray.get(i);
-                Team course = new Team();
+                Team team = new Team();
 
-                // Create this method
-                //user.setUserId(row.get("user_id"));
-                course.setTeamName((String)row.get("team_name"));
-                course.setCreation_date((Timestamp)row.get("creation_date"));
-                course.setCaptain_id((Integer)row.get("captain"));
-                course.setStatus((String)row.get("status"));
-                course.setMin_capacity((Integer)row.get("min_capacity"));
-                course.setMax_capacity((Integer)row.get("max_capacity"));
-                course.setSection_id((Integer)row.get("section"));
+                team.setTeam_id((Integer)row.get("team_id"));
+                team.setTeamName((String)row.get("team_name"));
+                team.setCreation_date((Timestamp)row.get("creation_date"));
+                team.setCaptain_id((Integer)row.get("captain"));
+                team.setStatus((String)row.get("status"));
+                team.setMin_capacity((Integer)row.get("min_capacity"));
+                team.setMax_capacity((Integer)row.get("max_capacity"));
+                //TODO: Add this column to table
 
-                teams.add(course);
+                team.setSection_id((Integer)row.get("section"));
+
+                teams.add(team);
             }
             return teams;
         }

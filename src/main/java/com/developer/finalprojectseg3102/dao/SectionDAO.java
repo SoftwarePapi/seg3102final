@@ -38,6 +38,7 @@ public class SectionDAO extends BaseDAO{
             JSONObject jsonObj = (JSONObject)parse.parse(rawJson);
 
             Section section = new Section();
+            section.setSection_id((Integer)jsonObj.get("section_id"));
             section.setSection_name((String)jsonObj.get("section_name"));
             section.setCourse_id((Integer)jsonObj.get("course_id"));
             section.setProfessor_id((Integer)jsonObj.get("professor"));
@@ -71,6 +72,7 @@ public class SectionDAO extends BaseDAO{
                 JSONObject row = (JSONObject)jsonArray.get(i);
 
                 Section section = new Section();
+                section.setSection_id((Integer)row.get("section_id"));
                 section.setSection_name((String)row.get("section_name"));
                 section.setCourse_id((Integer)row.get("course_id"));
                 section.setProfessor_id((Integer)row.get("professor"));

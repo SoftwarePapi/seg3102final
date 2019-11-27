@@ -1,5 +1,7 @@
 package com.developer.finalprojectseg3102.models;
 
+import com.developer.finalprojectseg3102.dao.UserDAO;
+
 import java.util.List;
 
 public class User {
@@ -20,6 +22,7 @@ public class User {
 	}
 
 	public User(int user_id, String firstName, String lastName, long identification_number, String email, String account_type, String program, String password, List<Team> teams) {
+		this.user_id = user_id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.identification_number = identification_number;
@@ -77,9 +80,24 @@ public class User {
 	public String getPassword() {
 		return password;
 	}
-
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public List<Section> getSections() throws Exception {
+		return UserDAO.retrieveStudentSections(getUser_id());
+	}
+
+	public void setSections(List<Section> sections) {
+		this.sections = sections;
+	}
+
+	public List<Team> getTeams() throws Exception {
+		return UserDAO.retriveStudentTeams(getUser_id());
+	}
+
+	public void setTeams(List<Team> teams) {
+		this.teams = teams;
 	}
 
 	public boolean isAdmin(){

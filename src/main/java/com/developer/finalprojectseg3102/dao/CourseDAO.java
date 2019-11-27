@@ -48,7 +48,7 @@ public class CourseDAO extends BaseDAO {
             Course course = new Course();
 
             // Create this method
-//			user.setUser_id(((Long)jsonObj.get("user_id")).intValue());
+			course.setCourse_id(((Long)jsonObj.get("course_id")).intValue());
             course.setCourseCode((String)jsonObj.get("course_code"));
             return course;
         }
@@ -76,13 +76,10 @@ public class CourseDAO extends BaseDAO {
 
             ArrayList<Course> courses = new ArrayList<Course>();
             for(int i=0; i < jsonArray.size(); i++){
-
-                //
                 JSONObject row = (JSONObject)jsonArray.get(i);
                 Course course = new Course();
 
-                // Create this method
-                //user.setUserId(row.get("user_id"));
+                course.setCourse_id(((Long)row.get("course_id")).intValue());
                 course.setCourseCode((String)row.get("course_code"));
 
                 courses.add(course);

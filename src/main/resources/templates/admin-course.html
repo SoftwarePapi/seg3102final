@@ -16,8 +16,7 @@
 
     <h3>Course List</h3>
     <tr th:each="course: ${courses}">
-        <td th:text="${course.getCourseCode()}" /><br>
-        <td
+        <td th:text="${course.courseCode}" /><br>
     </tr>
 </body>
 </html>

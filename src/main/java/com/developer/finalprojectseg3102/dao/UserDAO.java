@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
+import com.developer.finalprojectseg3102.models.Section;
+import com.developer.finalprojectseg3102.models.Team;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.JSONObject;
@@ -143,8 +145,7 @@ public class UserDAO extends BaseDAO {
 				JSONObject row = (JSONObject)jsonArray.get(i);
 				User user = new User();
 
-				// Create this method
-				//user.setUserId(row.get("user_id"));
+				user.setUser_id(((Long)row.get("user_id")).intValue());
 				user.setAccountType((String)row.get("account_type"));
 				user.setFirstName((String)row.get("first_name"));
 				user.setLastName((String)row.get("last_name"));
@@ -157,4 +158,73 @@ public class UserDAO extends BaseDAO {
 			return users;
 		}
 	}
+
+	public static ArrayList<Section> retrieveStudentSections(int user_id) throws Exception{
+
+		URL url = new URL(BASEURLV1 + "section_students/?format=json");
+		HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+		conn.setRequestMethod("GET");
+		conn.connect();
+		int responseCode = conn.getResponseCode();
+
+		if(responseCode != 200){
+			throw new RuntimeException("HttpResponseCode: " + responseCode);
+		}
+		else{
+			String rawJson = new String();
+			Scanner sc = new Scanner(url.openStream());
+			while(sc.hasNext()){
+				rawJson += sc.nextLine();
+			}
+			sc.close();
+			JSONParser parser = new JSONParser();
+			JSONArray jsonArray = (JSONArray) parser.parse(rawJson);
+
+			ArrayList<Section> student_sections = new ArrayList<Section>();
+			for(int i=0; i < jsonArray.size(); i++){
+				JSONObject row = (JSONObject)jsonArray.get(i);
+
+				if((Integer)row.get("user_id") == user_id){
+					Section section = SectionDAO.retrieve((Integer)row.get("section_id"));
+					student_sections.add(section);
+				}
+			}
+			return student_sections;
+		}
+	}
+
+	public static ArrayList<Team> retriveStudentTeams(int user_id) throws Exception{
+
+		URL url = new URL(BASEURLV1 + "team_members/?format=json");
+		HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+		conn.setRequestMethod("GET");
+		conn.connect();
+		int responseCode = conn.getResponseCode();
+
+		if(responseCode != 200){
+			throw new RuntimeException("HttpResponseCode: " + responseCode);
+		}
+		else{
+			String rawJson = new String();
+			Scanner sc = new Scanner(url.openStream());
+			while(sc.hasNext()){
+				rawJson += sc.nextLine();
+			}
+			sc.close();
+			JSONParser parser = new JSONParser();
+			JSONArray jsonArray = (JSONArray) parser.parse(rawJson);
+
+			ArrayList<Team> student_teams= new ArrayList<Team>();
+			for(int i=0; i < jsonArray.size(); i++){
+				JSONObject row = (JSONObject)jsonArray.get(i);
+
+				if((Integer)row.get("user_id") == user_id){
+					Team team = TeamDAO.retrieve((Integer)row.get("team_id"));
+					student_teams.add(team);
+				}
+			}
+			return student_teams;
+		}
+	}
+
 }

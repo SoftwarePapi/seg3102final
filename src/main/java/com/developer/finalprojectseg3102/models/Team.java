@@ -1,5 +1,7 @@
 package com.developer.finalprojectseg3102.models;
 
+import com.developer.finalprojectseg3102.dao.SectionDAO;
+import com.developer.finalprojectseg3102.dao.TeamDAO;
 import com.developer.finalprojectseg3102.dao.UserDAO;
 
 import java.sql.Timestamp;
@@ -7,6 +9,7 @@ import java.util.List;
 
 public class Team {
 
+	private int team_id;
 	private String team_name;
 	private Timestamp creation_date;
 	private List<User> members;
@@ -30,6 +33,14 @@ public class Team {
 		this.min_capacity = min_capacity;
 		this.max_capacity = max_capacity;
 		this.section = section;
+	}
+
+	public int getTeam_id() {
+		return team_id;
+	}
+
+	public void setTeam_id(int team_id) {
+		this.team_id = team_id;
 	}
 
 	public String getTeamName() {
@@ -77,6 +88,12 @@ public class Team {
 	public void setMemberList(List<User> members) {
 		this.members = members;
 	}
+
+	public List<User> getMembers() throws Exception {
+		List<User> members = TeamDAO.retrieveTeamMembers(getTeam_id());
+		return members;
+	}
+
 	public void addMember(User newMember){
 		this.members.add(newMember);
 	}
@@ -93,8 +110,8 @@ public class Team {
 		this.captain = captain;
 	}
 
-	public Section getSection() {
-		return section;
+	public Section getSection() throws Exception {
+		return SectionDAO.retrieve(getSection_id());
 	}
 
 	public int getSection_id() {
