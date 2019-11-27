@@ -1,7 +1,5 @@
 package com.developer.finalprojectseg3102.models;
 
-import com.developer.finalprojectseg3102.dao.UserDAO;
-
 import java.util.List;
 
 public class User {
@@ -85,7 +83,7 @@ public class User {
 	}
 
 	public List<Section> getSections() throws Exception {
-		return UserDAO.retrieveStudentSections(getUser_id());
+		return sections;
 	}
 
 	public void setSections(List<Section> sections) {
@@ -93,7 +91,7 @@ public class User {
 	}
 
 	public List<Team> getTeams() throws Exception {
-		return UserDAO.retriveStudentTeams(getUser_id());
+		return teams;
 	}
 
 	public void setTeams(List<Team> teams) {

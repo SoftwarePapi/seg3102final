@@ -1,9 +1,5 @@
 package com.developer.finalprojectseg3102.models;
 
-import com.developer.finalprojectseg3102.dao.CourseDAO;
-import com.developer.finalprojectseg3102.dao.SectionDAO;
-import com.developer.finalprojectseg3102.dao.UserDAO;
-
 import java.util.List;
 
 /**
@@ -46,7 +42,7 @@ public class Section {
     }
 
     public Course getCourse() throws Exception {
-        return CourseDAO.retrieve(getCourse_id());
+        return course;
     }
 
     public void setCourse(Course course) {
@@ -62,7 +58,7 @@ public class Section {
     }
 
     public User getProfessor() throws Exception {
-        return UserDAO.retrieve(getProfessor_id());
+        return professor;
     }
 
     public void setProfessor(User professor) {
@@ -78,7 +74,6 @@ public class Section {
     }
 
     public List<User> getStudents() throws Exception {
-        this.students = SectionDAO.retrieveSectionStudents(this.section_id);
         return students;
     }
 

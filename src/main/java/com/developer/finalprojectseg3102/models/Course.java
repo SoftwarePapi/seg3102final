@@ -1,7 +1,5 @@
 package com.developer.finalprojectseg3102.models;
 
-import com.developer.finalprojectseg3102.dao.SectionDAO;
-
 import java.util.List;
 
 /**
@@ -34,14 +32,6 @@ public class Course {
     }
 
     public List<Section> getSections(int course_id) throws Exception {
-        List<Section> sections = SectionDAO.retrieveSections();
-
-        for(int i=0; i<sections.size(); i++){
-            Section section = sections.get(i);
-            if(section.getCourse_id() == course_id){
-                sections.add(section);
-            }
-        }
         return sections;
     }
 

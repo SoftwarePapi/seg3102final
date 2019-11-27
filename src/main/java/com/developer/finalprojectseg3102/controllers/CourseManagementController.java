@@ -1,7 +1,11 @@
 package com.developer.finalprojectseg3102.controllers;
 
 import com.developer.finalprojectseg3102.dao.CourseDAO;
+import com.developer.finalprojectseg3102.dao.SectionDAO;
+import com.developer.finalprojectseg3102.dao.UserDAO;
 import com.developer.finalprojectseg3102.models.Course;
+import com.developer.finalprojectseg3102.models.Section;
+import com.developer.finalprojectseg3102.models.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -11,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpSession;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.developer.finalprojectseg3102.controllers.BaseController.isLoggedIn;
 
@@ -41,5 +46,33 @@ public class CourseManagementController extends BaseController {
         return "admin-course";
     }
 
+    public List<Section> getCourseSections(int course_id) throws Exception {
+        List<Section> sections = SectionDAO.retrieveSections();
 
+        for(int i=0; i<sections.size(); i++){
+            Section section = sections.get(i);
+            if(section.getCourse_id() == course_id){
+                sections.add(section);
+            }
+        }
+        return sections;
+    }
+
+    public Course getSectionsCourse(int section_id ) throws Exception {
+        Section section = SectionDAO.retrieve(section_id);
+        Course course = CourseDAO.retrieve(section.getCourse_id());
+        return course;
+    }
+    public List<Section> getStudentSections(int user_id) throws Exception {
+        return UserDAO.retrieveStudentSections(user_id);
+    }
+
+    public List<User> getSectionsStudents(int section_id) throws Exception {
+        return SectionDAO.retrieveSectionStudents(section_id);
+    }
+
+    public User getSectionsProfessor(int section_id) throws Exception {
+        Section section = SectionDAO.retrieve(section_id);
+        return UserDAO.retrieve(section.getProfessor_id());
+    }
 }

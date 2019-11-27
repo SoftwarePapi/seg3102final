@@ -1,9 +1,5 @@
 package com.developer.finalprojectseg3102.models;
 
-import com.developer.finalprojectseg3102.dao.SectionDAO;
-import com.developer.finalprojectseg3102.dao.TeamDAO;
-import com.developer.finalprojectseg3102.dao.UserDAO;
-
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -90,7 +86,6 @@ public class Team {
 	}
 
 	public List<User> getMembers() throws Exception {
-		List<User> members = TeamDAO.retrieveTeamMembers(getTeam_id());
 		return members;
 	}
 
@@ -103,15 +98,15 @@ public class Team {
 		members.remove(user);
 	}
 	public User getCaptain() throws Exception {
-		User user = UserDAO.retrieve(this.getCaptain_id());
-		return user;
+		return captain;
 	}
 	public void setCaptain(User captain) {
 		this.captain = captain;
 	}
 
+	//TODO: Add section_id to table of Team
 	public Section getSection() throws Exception {
-		return SectionDAO.retrieve(getSection_id());
+		return section;
 	}
 
 	public int getSection_id() {
