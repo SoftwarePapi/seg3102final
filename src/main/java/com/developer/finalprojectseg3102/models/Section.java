@@ -1,5 +1,9 @@
 package com.developer.finalprojectseg3102.models;
 
+import com.developer.finalprojectseg3102.dao.CourseDAO;
+import com.developer.finalprojectseg3102.dao.SectionDAO;
+import com.developer.finalprojectseg3102.dao.UserDAO;
+
 import java.util.List;
 
 /**
@@ -7,11 +11,13 @@ import java.util.List;
  */
 public class Section {
 
+    private int section_id;
     private String section_name;
     private Course course;
+    private int course_id;
     private User professor;
     private List<User> students;
-
+    private int professor_id;
 
     public Section() {
     }
@@ -23,6 +29,14 @@ public class Section {
         this.students = students;
     }
 
+    public int getSection_id() {
+        return section_id;
+    }
+
+    public void setSection_id(int section_id) {
+        this.section_id = section_id;
+    }
+
     public String getSection_name() {
         return section_name;
     }
@@ -31,23 +45,40 @@ public class Section {
         this.section_name = section_name;
     }
 
-    public Course getCourse() {
-        return course;
+    public Course getCourse() throws Exception {
+        return CourseDAO.retrieve(getCourse_id());
     }
 
     public void setCourse(Course course) {
         this.course = course;
     }
 
-    public User getProfessor() {
-        return professor;
+    public int getCourse_id() {
+        return course_id;
+    }
+
+    public void setCourse_id(int course_id) {
+        this.course_id = course_id;
+    }
+
+    public User getProfessor() throws Exception {
+        return UserDAO.retrieve(getProfessor_id());
     }
 
     public void setProfessor(User professor) {
         this.professor = professor;
     }
 
-    public List<User> getStudents() {
+    public int getProfessor_id() {
+        return professor_id;
+    }
+
+    public void setProfessor_id(int professor_id) {
+        this.professor_id = professor_id;
+    }
+
+    public List<User> getStudents() throws Exception {
+        this.students = SectionDAO.retrieveSectionStudents(this.section_id);
         return students;
     }
 

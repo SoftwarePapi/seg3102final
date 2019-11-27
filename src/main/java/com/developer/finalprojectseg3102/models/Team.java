@@ -16,6 +16,7 @@ public class Team {
 	private int min_capacity;
 	private int max_capacity;
 	private Section section;
+	private int section_id;
 
 	public Team() {
 	}
@@ -40,6 +41,39 @@ public class Team {
 	public List<User> getMemberList() {
 		return members;
 	}
+
+	public Timestamp getCreation_date() {
+		return creation_date;
+	}
+
+	public void setCreation_date(Timestamp creation_date) {
+		this.creation_date = creation_date;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public int getMin_capacity() {
+		return min_capacity;
+	}
+
+	public void setMin_capacity(int min_capacity) {
+		this.min_capacity = min_capacity;
+	}
+
+	public int getMax_capacity() {
+		return max_capacity;
+	}
+
+	public void setMax_capacity(int max_capacity) {
+		this.max_capacity = max_capacity;
+	}
+
 	public void setMemberList(List<User> members) {
 		this.members = members;
 	}
@@ -62,6 +96,15 @@ public class Team {
 	public Section getSection() {
 		return section;
 	}
+
+	public int getSection_id() {
+		return section_id;
+	}
+
+	public void setSection_id(int section_id) {
+		this.section_id = section_id;
+	}
+
 	public void setSection(Section section) {
 		this.section = section;
 	}

@@ -24,10 +24,8 @@ public class RunApplication extends BaseController{
 		if (!isLoggedIn(session)) {
 			return "login";
 		} else {
-			User user = (User)session.getAttribute("user");
-			String name = user.getFirstName();
-			System.out.println(name);
-			model.addAttribute(name);
+			User current_user = (User) session.getAttribute("user");
+			model.addAttribute("user", current_user);
 			return "index";
 		}
 		

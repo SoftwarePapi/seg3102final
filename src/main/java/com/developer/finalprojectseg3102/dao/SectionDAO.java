@@ -1,6 +1,6 @@
 package com.developer.finalprojectseg3102.dao;
 
-import com.developer.finalprojectseg3102.models.Team;
+import com.developer.finalprojectseg3102.models.Section;
 import com.developer.finalprojectseg3102.models.User;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -8,19 +8,18 @@ import org.json.simple.parser.JSONParser;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
- * Created by Parastoo on 11/25/2019.
+ * Created by Parastoo on 11/26/2019.
  */
-public class TeamDAO extends BaseDAO{
+public class SectionDAO extends BaseDAO{
 
+    public static Section retrieve(Integer id) throws Exception{
 
-    public static Team retrieve(Integer id) throws Exception{
-
-        URL url = new URL(BASEURLV1 + "teams/" + id.toString()+"/?format=json");
+        URL url = new URL(BASEURLV1 + "/sections/" + id.toString()+"/?format=json");
         HttpURLConnection con = (HttpURLConnection)url.openConnection();
         con.setRequestMethod("GET");
         con.connect();
@@ -38,18 +37,17 @@ public class TeamDAO extends BaseDAO{
             JSONParser parse = new JSONParser();
             JSONObject jsonObj = (JSONObject)parse.parse(rawJson);
 
-            Team team = new Team();
+            Section section = new Section();
+            section.setSection_name((String)jsonObj.get("section_name"));
+            section.setCourse_id((Integer)jsonObj.get("course_id"));
+            section.setProfessor_id((Integer)jsonObj.get("professor"));
 
-            // Create this method
-            team.setTeamName((String)jsonObj.get("team_name"));
-            team.setCaptain_id((Integer)jsonObj.get("captain"));
-            return team;
+            return section;
         }
     }
+    public static ArrayList<Section> retrieveSections() throws Exception{
 
-    public static ArrayList<Team> retrieveTeams() throws Exception{
-
-        URL url = new URL(BASEURLV1 + "teams/?format=json");
+        URL url = new URL(BASEURLV1 + "sections/?format=json");
         HttpURLConnection conn = (HttpURLConnection)url.openConnection();
         conn.setRequestMethod("GET");
         conn.connect();
@@ -68,32 +66,24 @@ public class TeamDAO extends BaseDAO{
             JSONParser parser = new JSONParser();
             JSONArray jsonArray = (JSONArray) parser.parse(rawJson);
 
-            ArrayList<Team> teams = new ArrayList<Team>();
+            ArrayList<Section> sections = new ArrayList<Section>();
             for(int i=0; i < jsonArray.size(); i++){
-
-                //
                 JSONObject row = (JSONObject)jsonArray.get(i);
-                Team course = new Team();
 
-                // Create this method
-                //user.setUserId(row.get("user_id"));
-                course.setTeamName((String)row.get("team_name"));
-                course.setCreation_date((Timestamp)row.get("creation_date"));
-                course.setCaptain_id((Integer)row.get("captain"));
-                course.setStatus((String)row.get("status"));
-                course.setMin_capacity((Integer)row.get("min_capacity"));
-                course.setMax_capacity((Integer)row.get("max_capacity"));
-                course.setSection_id((Integer)row.get("section"));
+                Section section = new Section();
+                section.setSection_name((String)row.get("section_name"));
+                section.setCourse_id((Integer)row.get("course_id"));
+                section.setProfessor_id((Integer)row.get("professor"));
 
-                teams.add(course);
+                sections.add(section);
             }
-            return teams;
+            return sections;
         }
     }
 
-    public static ArrayList<User> retrieveTeamMembers(int team_id) throws Exception{
+    public static ArrayList<User> retrieveSectionStudents(int section_id) throws Exception{
 
-        URL url = new URL(BASEURLV1 + "team_members/?format=json");
+        URL url = new URL(BASEURLV1 + "section_students/?format=json");
         HttpURLConnection conn = (HttpURLConnection)url.openConnection();
         conn.setRequestMethod("GET");
         conn.connect();
@@ -112,17 +102,16 @@ public class TeamDAO extends BaseDAO{
             JSONParser parser = new JSONParser();
             JSONArray jsonArray = (JSONArray) parser.parse(rawJson);
 
-            ArrayList<User> team_members = new ArrayList<User>();
+            ArrayList<User> section_students = new ArrayList<User>();
             for(int i=0; i < jsonArray.size(); i++){
                 JSONObject row = (JSONObject)jsonArray.get(i);
 
-                if((Integer)row.get("team_id") == team_id){
+                if((Integer)row.get("section_id") == section_id){
                     User student = UserDAO.retrieve((Integer)row.get("user_id"));
-                    team_members.add(student);
+                    section_students.add(student);
                 }
             }
-            return team_members;
+            return section_students;
         }
     }
-
 }

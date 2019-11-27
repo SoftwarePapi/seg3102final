@@ -25,14 +25,9 @@ public class CourseDAO extends BaseDAO {
 	 * DELETE
 	 */
 
-    private final static String TABLENAME = "COURSE";
-    private final static String COLUMNS = "(course_code)";
-    private final static String QUERYEND = ");";
-
-
     public static Course retrieve(Integer id) throws Exception{
 
-        URL url = new URL("http://team-management-system.herokuapp.com/api/v1/courses/" + id.toString()+"/?format=json");
+        URL url = new URL(BASEURLV1 + "/courses/" + id.toString()+"/?format=json");
         HttpURLConnection con = (HttpURLConnection)url.openConnection();
         con.setRequestMethod("GET");
         con.connect();

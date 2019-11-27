@@ -36,12 +36,7 @@ public class CourseManagementController extends BaseController {
     @RequestMapping(value = "/admin-course")
     public String adminCourse(@ModelAttribute Course course, Model model, HttpSession session) throws Exception {
         //Also check if the user is admin: current_user.isAdmin()
-        ArrayList<Course> courses = new ArrayList<Course>();
-        for(int i =1; i< 5; i++){
-            Course c = new Course();
-            c = CourseDAO.retrieve(i);
-            courses.add(c);
-        }
+        ArrayList<Course> courses = CourseDAO.retrieveCourses();
         model.addAttribute("courses", courses);
         return "admin-course";
     }
