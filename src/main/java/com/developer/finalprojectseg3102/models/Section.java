@@ -80,8 +80,5 @@ public class Section {
     public void setStudents(List<User> students) {
         this.students = students;
     }
-
-    public String full_name(){
-        return (this.course.getCourseCode() + this.section_name);
-    }
+    
 }

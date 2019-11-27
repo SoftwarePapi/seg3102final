@@ -75,4 +75,10 @@ public class CourseManagementController extends BaseController {
         Section section = SectionDAO.retrieve(section_id);
         return UserDAO.retrieve(section.getProfessor_id());
     }
+
+    public String sectionFullName(int section_id) throws Exception {
+        Section section = SectionDAO.retrieve(section_id);
+        Course course = CourseDAO.retrieve(section.getCourse_id());
+        return (course.getCourseCode() + section.getSection_name());
+    }
 }
