@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.thymeleaf.standard.expression.AndExpression;
 
 import com.developer.finalprojectseg3102.dao.UserDAO;
 import com.developer.finalprojectseg3102.models.User;
@@ -42,14 +41,14 @@ public class LoginController extends BaseController {
 								&& user.getPassword().equals(userList.get(i).getPassword())) {
 							session.setAttribute("loggedIn", true);
 							User loggedInUser = new User();
-							loggedInUser.setAccountType(user.getAccountType());
-							loggedInUser.setEmail(user.getEmail());
-							loggedInUser.setFirstName(user.getFirstName());
-							loggedInUser.setIdentificationNumber(user.getIdentificationNumber());
-							loggedInUser.setLastName(user.getLastName());
-							loggedInUser.setPassword(user.getPassword());
-							loggedInUser.setProgram(user.getProgram());
-							loggedInUser.setUser_id(user.getUser_id());
+							loggedInUser.setAccountType(userList.get(i).getAccountType());
+							loggedInUser.setEmail(userList.get(i).getEmail());
+							loggedInUser.setFirstName(userList.get(i).getFirstName());
+							loggedInUser.setIdentificationNumber(userList.get(i).getIdentificationNumber());
+							loggedInUser.setLastName(userList.get(i).getLastName());
+							loggedInUser.setPassword(userList.get(i).getPassword());
+							loggedInUser.setProgram(userList.get(i).getProgram());
+							loggedInUser.setUser_id(userList.get(i).getUser_id());
 							session.setAttribute("user", loggedInUser);
 							break;
 

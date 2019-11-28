@@ -21,4 +21,12 @@ public class Course {
     public void setCourseCode(String course_code){
         this.course_code = course_code;
     }
+
+	public List<Section> getSections() {
+		return sections;
+	}
+
+	public void setSections(List<Section> sections) {
+		this.sections = sections;
+	}
 }
