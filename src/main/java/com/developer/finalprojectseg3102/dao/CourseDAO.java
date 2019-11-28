@@ -8,11 +8,7 @@ import org.json.simple.parser.JSONParser;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class CourseDAO extends BaseDAO {
@@ -25,9 +21,9 @@ public class CourseDAO extends BaseDAO {
 	 * DELETE
 	 */
 
-    public static Course retrieve(Integer id) throws Exception{
+    public static Course retrieve(Long id) throws Exception{
 
-        URL url = new URL(BASEURLV1 + "/courses/" + id.toString()+"/?format=json");
+        URL url = new URL(BASEURLV1 + "courses/" + id.toString()+"/?format=json");
         HttpURLConnection con = (HttpURLConnection)url.openConnection();
         con.setRequestMethod("GET");
         con.connect();
@@ -44,10 +40,8 @@ public class CourseDAO extends BaseDAO {
             sc.close();
             JSONParser parse = new JSONParser();
             JSONObject jsonObj = (JSONObject)parse.parse(rawJson);
-
             Course course = new Course();
 
-            // Create this method
 			course.setCourse_id(((Long)jsonObj.get("course_id")).intValue());
             course.setCourseCode((String)jsonObj.get("course_code"));
             return course;

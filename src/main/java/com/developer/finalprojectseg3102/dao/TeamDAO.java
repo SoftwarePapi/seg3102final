@@ -18,7 +18,7 @@ import java.util.Scanner;
 public class TeamDAO extends BaseDAO{
 
 
-    public static Team retrieve(Integer id) throws Exception{
+    public static Team retrieve(Long id) throws Exception{
 
         URL url = new URL(BASEURLV1 + "teams/" + id.toString()+"/?format=json");
         HttpURLConnection con = (HttpURLConnection)url.openConnection();
@@ -40,15 +40,14 @@ public class TeamDAO extends BaseDAO{
 
             Team team = new Team();
 
-            team.setTeam_id((Integer)jsonObj.get("team_id"));
+            team.setTeam_id((Long)jsonObj.get("team_id"));
             team.setTeamName((String)jsonObj.get("team_name"));
-            team.setCreation_date((Timestamp)jsonObj.get("creation_date"));
-            team.setCaptain_id((Integer)jsonObj.get("captain"));
+//            team.setCreation_date((Timestamp)jsonObj.get("creation_date"));
+            team.setCaptain_id((Long)jsonObj.get("captain"));
             team.setStatus((String)jsonObj.get("status"));
-            team.setMin_capacity((Integer)jsonObj.get("min_capacity"));
-            team.setMax_capacity((Integer)jsonObj.get("max_capacity"));
-            //TODO: Add this column to table
-            team.setSection_id((Integer)jsonObj.get("section"));
+            team.setMin_capacity(((Long)jsonObj.get("min_capacity")).intValue());
+            team.setMax_capacity(((Long)jsonObj.get("max_capacity")).intValue());
+            team.setSection_id((Long)jsonObj.get("section_id"));
 
             return team;
         }
@@ -82,16 +81,14 @@ public class TeamDAO extends BaseDAO{
                 JSONObject row = (JSONObject)jsonArray.get(i);
                 Team team = new Team();
 
-                team.setTeam_id((Integer)row.get("team_id"));
+                team.setTeam_id((Long)row.get("team_id"));
                 team.setTeamName((String)row.get("team_name"));
-                team.setCreation_date((Timestamp)row.get("creation_date"));
-                team.setCaptain_id((Integer)row.get("captain"));
+//                team.setCreation_date((Timestamp)row.get("creation_date"));
+                team.setCaptain_id((Long)row.get("captain"));
                 team.setStatus((String)row.get("status"));
-                team.setMin_capacity((Integer)row.get("min_capacity"));
-                team.setMax_capacity((Integer)row.get("max_capacity"));
-                //TODO: Add this column to table
-
-                team.setSection_id((Integer)row.get("section"));
+                team.setMin_capacity(((Long)row.get("min_capacity")).intValue());
+                team.setMax_capacity(((Long)row.get("max_capacity")).intValue());
+                team.setSection_id((Long)row.get("section_id"));
 
                 teams.add(team);
             }
@@ -99,7 +96,7 @@ public class TeamDAO extends BaseDAO{
         }
     }
 
-    public static ArrayList<User> retrieveTeamMembers(int team_id) throws Exception{
+    public static ArrayList<User> retrieveTeamMembers(Long team_id) throws Exception{
 
         URL url = new URL(BASEURLV1 + "team_members/?format=json");
         HttpURLConnection conn = (HttpURLConnection)url.openConnection();
@@ -124,8 +121,8 @@ public class TeamDAO extends BaseDAO{
             for(int i=0; i < jsonArray.size(); i++){
                 JSONObject row = (JSONObject)jsonArray.get(i);
 
-                if((Integer)row.get("team_id") == team_id){
-                    User student = UserDAO.retrieve((Integer)row.get("user_id"));
+                if(row.get("team_id") == team_id){
+                    User student = UserDAO.retrieve((Long)row.get("user_id"));
                     team_members.add(student);
                 }
             }

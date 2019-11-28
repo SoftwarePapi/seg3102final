@@ -7,7 +7,7 @@ import java.util.List;
  */
 public class Course {
 
-    private int course_id;
+    private long course_id;
     private String course_code;
     private List<Section> sections;
 
@@ -15,11 +15,11 @@ public class Course {
 
     }
 
-    public int getCourse_id() {
+    public long getCourse_id() {
         return course_id;
     }
 
-    public void setCourse_id(int course_id) {
+    public void setCourse_id(long course_id) {
         this.course_id = course_id;
     }
 

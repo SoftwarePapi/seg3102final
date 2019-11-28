@@ -5,17 +5,17 @@ import java.util.List;
 
 public class Team {
 
-	private int team_id;
+	private long team_id;
 	private String team_name;
 	private Timestamp creation_date;
 	private List<User> members;
 	private User captain;
-	private int captain_id;
+	private long captain_id;
 	private String status;
 	private int min_capacity;
 	private int max_capacity;
 	private Section section;
-	private int section_id;
+	private long section_id;
 
 	public Team() {
 	}
@@ -31,18 +31,18 @@ public class Team {
 		this.section = section;
 	}
 
-	public int getTeam_id() {
+	public long getTeam_id() {
 		return team_id;
 	}
 
-	public void setTeam_id(int team_id) {
+	public void setTeam_id(long team_id) {
 		this.team_id = team_id;
 	}
 
 	public String getTeamName() {
 		return team_name;
 	}
-	public void setTeamName(String name) {
+	public void setTeamName(String team_name) {
 		this.team_name = team_name;
 	}
 	public List<User> getMemberList() {
@@ -109,11 +109,11 @@ public class Team {
 		return section;
 	}
 
-	public int getSection_id() {
+	public long getSection_id() {
 		return section_id;
 	}
 
-	public void setSection_id(int section_id) {
+	public void setSection_id(long section_id) {
 		this.section_id = section_id;
 	}
 
@@ -121,11 +121,11 @@ public class Team {
 		this.section = section;
 	}
 
-	public int getCaptain_id() {
+	public long getCaptain_id() {
 		return captain_id;
 	}
 
-	public void setCaptain_id(int captain_id) {
+	public void setCaptain_id(long captain_id) {
 		this.captain_id = captain_id;
 	}
 }

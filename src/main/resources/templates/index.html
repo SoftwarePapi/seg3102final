@@ -35,7 +35,10 @@
 		<p class="title">Welcome, <span th:text="${user?.firstName}">Name</span></p>
 		
 		<div class="columns">
-		  	<div class="column"> 
+		  	<div class="column">
+				<tr th:each="section: ${sections}">
+					<td th:text="${section.section_name}" /><br>
+				</tr>
 		     <a href="course"  class="coursestyle">???Course code and section</a>
 		     <p></p>
 		     <a href="team" class="teamstyle">???Team</a>

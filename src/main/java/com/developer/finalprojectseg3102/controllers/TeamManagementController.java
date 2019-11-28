@@ -55,22 +55,22 @@ public class TeamManagementController extends BaseController{
         return "thread";
     }
 
-    public List<Team> getStudentTeams(int user_id) throws Exception {
-        return UserDAO.retriveStudentTeams(user_id);
+    public List<Team> getStudentTeams(Long user_id) throws Exception {
+        return UserDAO.retrieveStudentTeams(user_id);
     }
 
-    public List<User> getTeamMembers(int team_id) throws Exception {
+    public List<User> getTeamMembers(Long team_id) throws Exception {
         Team team = TeamDAO.retrieve(team_id);
         List<User> members = TeamDAO.retrieveTeamMembers(team.getTeam_id());
         return members;
     }
-    public User getTeamCaptain(int team_id) throws Exception {
+    public User getTeamCaptain(Long team_id) throws Exception {
         Team team = TeamDAO.retrieve(team_id);
         User user = UserDAO.retrieve(team.getCaptain_id());
         return user;
     }
 
-    public Section getTeamSection(int team_id) throws Exception {
+    public Section getTeamSection(Long team_id) throws Exception {
         Team team = TeamDAO.retrieve(team_id);
         return SectionDAO.retrieve(team.getSection_id());
     }

@@ -9,7 +9,6 @@ import org.json.simple.parser.JSONParser;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -17,9 +16,9 @@ import java.util.Scanner;
  */
 public class SectionDAO extends BaseDAO{
 
-    public static Section retrieve(Integer id) throws Exception{
+    public static Section retrieve(Long id) throws Exception{
 
-        URL url = new URL(BASEURLV1 + "/sections/" + id.toString()+"/?format=json");
+        URL url = new URL(BASEURLV1 + "sections/" + id.toString()+"/?format=json");
         HttpURLConnection con = (HttpURLConnection)url.openConnection();
         con.setRequestMethod("GET");
         con.connect();
@@ -33,15 +32,15 @@ public class SectionDAO extends BaseDAO{
             while(sc.hasNext()){
                 rawJson += sc.nextLine();
             }
+
             sc.close();
             JSONParser parse = new JSONParser();
             JSONObject jsonObj = (JSONObject)parse.parse(rawJson);
-
             Section section = new Section();
-            section.setSection_id((Integer)jsonObj.get("section_id"));
+            section.setSection_id((Long)jsonObj.get("section_id"));
             section.setSection_name((String)jsonObj.get("section_name"));
-            section.setCourse_id((Integer)jsonObj.get("course_id"));
-            section.setProfessor_id((Integer)jsonObj.get("professor"));
+            section.setCourse_id((Long)jsonObj.get("course_id"));
+            section.setProfessor_id((Long)jsonObj.get("professor"));
 
             return section;
         }
@@ -72,10 +71,10 @@ public class SectionDAO extends BaseDAO{
                 JSONObject row = (JSONObject)jsonArray.get(i);
 
                 Section section = new Section();
-                section.setSection_id((Integer)row.get("section_id"));
+                section.setSection_id((Long)row.get("section_id"));
                 section.setSection_name((String)row.get("section_name"));
-                section.setCourse_id((Integer)row.get("course_id"));
-                section.setProfessor_id((Integer)row.get("professor"));
+                section.setCourse_id((Long)row.get("course_id"));
+                section.setProfessor_id((Long)row.get("professor"));
 
                 sections.add(section);
             }
@@ -83,7 +82,7 @@ public class SectionDAO extends BaseDAO{
         }
     }
 
-    public static ArrayList<User> retrieveSectionStudents(int section_id) throws Exception{
+    public static ArrayList<User> retrieveSectionStudents(Long section_id) throws Exception{
 
         URL url = new URL(BASEURLV1 + "section_students/?format=json");
         HttpURLConnection conn = (HttpURLConnection)url.openConnection();
@@ -108,8 +107,8 @@ public class SectionDAO extends BaseDAO{
             for(int i=0; i < jsonArray.size(); i++){
                 JSONObject row = (JSONObject)jsonArray.get(i);
 
-                if((Integer)row.get("section_id") == section_id){
-                    User student = UserDAO.retrieve((Integer)row.get("user_id"));
+                if(row.get("section_id") == section_id){
+                    User student = UserDAO.retrieve((Long)row.get("user_id"));
                     section_students.add(student);
                 }
             }

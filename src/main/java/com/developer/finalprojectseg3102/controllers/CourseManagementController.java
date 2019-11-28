@@ -58,25 +58,23 @@ public class CourseManagementController extends BaseController {
         return sections;
     }
 
-    public Course getSectionsCourse(int section_id ) throws Exception {
+    public Course getSectionsCourse(Long section_id ) throws Exception {
         Section section = SectionDAO.retrieve(section_id);
         Course course = CourseDAO.retrieve(section.getCourse_id());
         return course;
     }
-    public List<Section> getStudentSections(int user_id) throws Exception {
-        return UserDAO.retrieveStudentSections(user_id);
-    }
 
-    public List<User> getSectionsStudents(int section_id) throws Exception {
+
+    public List<User> getSectionsStudents(Long section_id) throws Exception {
         return SectionDAO.retrieveSectionStudents(section_id);
     }
 
-    public User getSectionsProfessor(int section_id) throws Exception {
+    public User getSectionsProfessor(Long section_id) throws Exception {
         Section section = SectionDAO.retrieve(section_id);
         return UserDAO.retrieve(section.getProfessor_id());
     }
 
-    public String sectionFullName(int section_id) throws Exception {
+    public String sectionFullName(Long section_id) throws Exception {
         Section section = SectionDAO.retrieve(section_id);
         Course course = CourseDAO.retrieve(section.getCourse_id());
         return (course.getCourseCode() + section.getSection_name());

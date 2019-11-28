@@ -4,7 +4,7 @@ import java.util.List;
 
 public class User {
 
-	private int user_id;
+	private long user_id;
 	private String firstName;
 	private String lastName;
 	private long identification_number;
@@ -19,7 +19,7 @@ public class User {
 	public User() {
 	}
 
-	public User(int user_id, String firstName, String lastName, long identification_number, String email, String account_type, String program, String password, List<Team> teams) {
+	public User(long user_id, String firstName, String lastName, long identification_number, String email, String account_type, String program, String password, List<Team> teams) {
 		this.user_id = user_id;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -31,11 +31,11 @@ public class User {
 		this.teams = teams;
 	}
 
-	public int getUser_id() {
+	public long getUser_id() {
 		return user_id;
 	}
 
-	public void setUser_id(int user_id) {
+	public void setUser_id(long user_id) {
 		this.user_id = user_id;
 	}
 

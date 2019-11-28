@@ -1,9 +1,16 @@
 package com.developer.finalprojectseg3102.controllers;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import com.developer.finalprojectseg3102.dao.CourseDAO;
+import com.developer.finalprojectseg3102.dao.SectionDAO;
+import com.developer.finalprojectseg3102.dao.TeamDAO;
+import com.developer.finalprojectseg3102.models.Course;
+import com.developer.finalprojectseg3102.models.Section;
+import com.developer.finalprojectseg3102.models.Team;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -54,9 +61,15 @@ public class LoginController extends BaseController {
 		if (isLoggedIn(session)) {
 			User current_user = (User) session.getAttribute("user");
 			model.addAttribute("user", current_user);
+			List<Section> sections = getStudentSections(current_user.getUser_id());
+			model.addAttribute("sections", sections);
 			return "index";
 		} else {
 			return "login";
 		}
+	}
+
+	public List<Section> getStudentSections(long user_id) throws Exception {
+		return UserDAO.retrieveStudentSections(user_id);
 	}
 }
