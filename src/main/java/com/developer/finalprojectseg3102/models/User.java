@@ -4,7 +4,7 @@ import java.util.List;
 
 public class User {
 
-	private int user_id;
+	private long user_id;
 	private String firstName;
 	private String lastName;
 	private long identification_number;
@@ -19,7 +19,8 @@ public class User {
 	public User() {
 	}
 
-	public User(int user_id, String firstName, String lastName, long identification_number, String email, String account_type, String program, String password, List<Team> teams) {
+	public User(long user_id, String firstName, String lastName, long identification_number, String email, String account_type, String program, String password, List<Team> teams) {
+		this.user_id = user_id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.identification_number = identification_number;
@@ -30,11 +31,11 @@ public class User {
 		this.teams = teams;
 	}
 
-	public int getUser_id() {
+	public long getUser_id() {
 		return user_id;
 	}
 
-	public void setUser_id(int user_id) {
+	public void setUser_id(long user_id) {
 		this.user_id = user_id;
 	}
 
@@ -77,11 +78,35 @@ public class User {
 	public String getPassword() {
 		return password;
 	}
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
+	public List<Section> getSections() throws Exception {
+		return sections;
+	}
+
+	public void setSections(List<Section> sections) {
+		this.sections = sections;
+	}
+
+	public List<Team> getTeams() throws Exception {
+		return teams;
+	}
+
+	public void setTeams(List<Team> teams) {
+		this.teams = teams;
+	}
+
+	public boolean isAdmin(){
+		return (this.account_type == "admin");
+	}
+	public boolean isStudent(){
+		return (this.account_type == "student");
+	}
+	public boolean isProfessor() {
+		return (this.account_type == "professor");
+	}
 	public String toString() {
 		return getEmail();
 	}
