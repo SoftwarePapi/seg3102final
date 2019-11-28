@@ -31,11 +31,11 @@ public class Course {
         this.course_code = course_code;
     }
 
-    public List<Section> getSections(int course_id) throws Exception {
-        return sections;
-    }
+	public List<Section> getSections() {
+		return sections;
+	}
 
-    public void setSections(List<Section> sections) {
-        this.sections = sections;
-    }
+	public void setSections(List<Section> sections) {
+		this.sections = sections;
+	}
 }
