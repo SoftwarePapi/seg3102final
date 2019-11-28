@@ -14,19 +14,44 @@
 	<div class="wrapper fadeInDown">
 		<div id="formContent">
 			<!-- Tabs Titles -->
-			<h2 class="inactive underlineHover"><a href="#">Sign In</a></h2>
+			<h2 class="inactive underlineHover">
+				<a href="login">Sign In</a>
+			</h2>
 			<h2 class="active">Sign Up</h2>
 
-			<!-- Login Form -->
-			<form action="#" method="post" th:action="@{/login-attempt}" th:object="${User}" autocomplete="off">
-				<input type="text" id="login" class="second" th:name="email"
-					placeholder="email"> 
-					
-				<input type="password" id="password"
-					class="third" th:name="password" placeholder="password">
-					
-				<input
-					type="submit" class="fourth" value="Log In">
+			<!-- Sign Up Form -->
+			<form action="#" method="post" th:action="@{/signup-attempt}"
+				th:object="${User}" autocomplete="off">
+				<hr>
+				<input type="text" id="first_name" class="third"
+					th:name="first_name" placeholder="First Name"> <input
+					type="text" id="last_number" class="third" th:name="last_name"
+					placeholder="Last Name"> <input type="text" id="login"
+					class="second" th:name="email" placeholder="email"> <input
+					type="password" id="password" class="third" th:name="password"
+					placeholder="password">
+
+				<!-- Change the dropdown a little later -->
+				<select th:name="account_type">
+					<option th:disabled="true" th:selected="true">Please
+						Select An Account Type</option>
+					<option th:value="professor">Professor</option>
+					<option th:value="student">Student</option>
+				</select> <input type="text" id="id_number" class="third"
+					th:name="identification_number" placeholder="Identification Number">
+
+				<select th:name="program">
+					<option th:disabled="true" th:selected="true">Please
+						Select Your Program</option>
+					<option th:value="SEG">SEG</option>
+					<option th:value="CEG">CEG</option>
+					<option th:value="MEG">MEG</option>
+					<option th:value="CVG">CVG</option>
+					<option th:value="CHG">CHG</option>
+					<option th:value="CSI">CSI</option>
+				</select>
+				<hr>
+				<input type="submit" class="fourth" value="Sign Up">
 			</form>
 		</div>
 	</div>

@@ -83,10 +83,9 @@ public class LoginController extends BaseController {
 	public String showSignupPage(Model model, HttpSession session) {
 
 		if (session.getAttribute("user") == null) {
-			return "login";
-		} else {
-			/* return "redirect:/signup"; */
 			return "signup";
+		} else {
+			return "index";
 		}
 	}
 
