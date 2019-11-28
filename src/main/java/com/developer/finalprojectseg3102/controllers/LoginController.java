@@ -1,5 +1,6 @@
 package com.developer.finalprojectseg3102.controllers;
 
+import java.lang.ProcessBuilder.Redirect;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,6 +78,18 @@ public class LoginController extends BaseController {
 			return "login";
 		}
 	}
+	
+	@RequestMapping(value = "/signup")
+	public String showSignupPage(Model model, HttpSession session) {
+
+		if (session.getAttribute("user") == null) {
+			return "login";
+		} else {
+			/* return "redirect:/signup"; */
+			return "signup";
+		}
+	}
+
 
 	public List<Section> getStudentSections(long user_id) throws Exception {
 		return UserDAO.retrieveStudentSections(user_id);

@@ -156,43 +156,12 @@ input[type=text]:placeholder, input[type=password]:placeholder {
 	-webkit-transform: translate3d(0, -100%, 0);
 	transform: translate3d(0, -100%, 0);
 }
-
-100%
-{
-opacity
-
-
-:
-
- 
-
-1;
--webkit-transform
-
-
-:
-
- 
-
-none
-
-
-;
-transform
-
-
-:
-
- 
-
-none
-
-
-;
+100% { opacity: 1;
+-webkit-transform: none;
+transform: none; }
 }
-}
-@
-keyframes fadeInDown { 0% {
+
+@keyframes fadeInDown { 0% {
 	opacity: 0;
 	-webkit-transform: translate3d(0, -100%, 0);
 	transform: translate3d(0, -100%, 0);
@@ -200,37 +169,9 @@ keyframes fadeInDown { 0% {
 
 100%
 {
-opacity
-
-
-:
-
- 
-
-1;
--webkit-transform
-
-
-:
-
- 
-
-none
-
-
-;
-transform
-
-
-:
-
- 
-
-none
-
-
-;
-}
+opacity :1;
+-webkit-transform: none ;
+transform: none; }
 }
 
 /* Simple CSS3 Fade-in Animation */
