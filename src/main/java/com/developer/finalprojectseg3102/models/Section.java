@@ -7,11 +7,13 @@ import java.util.List;
  */
 public class Section {
 
+    private long section_id;
     private String section_name;
     private Course course;
+    private long course_id;
     private User professor;
     private List<User> students;
-
+    private long professor_id;
 
     public Section() {
     }
@@ -23,6 +25,14 @@ public class Section {
         this.students = students;
     }
 
+    public long getSection_id() {
+        return section_id;
+    }
+
+    public void setSection_id(long section_id) {
+        this.section_id = section_id;
+    }
+
     public String getSection_name() {
         return section_name;
     }
@@ -31,7 +41,7 @@ public class Section {
         this.section_name = section_name;
     }
 
-    public Course getCourse() {
+    public Course getCourse(){
         return course;
     }
 
@@ -39,7 +49,15 @@ public class Section {
         this.course = course;
     }
 
-    public User getProfessor() {
+    public long getCourse_id() {
+        return course_id;
+    }
+
+    public void setCourse_id(long course_id) {
+        this.course_id = course_id;
+    }
+
+    public User getProfessor(){
         return professor;
     }
 
@@ -47,11 +65,20 @@ public class Section {
         this.professor = professor;
     }
 
-    public List<User> getStudents() {
+    public long getProfessor_id() {
+        return professor_id;
+    }
+
+    public void setProfessor_id(long professor_id) {
+        this.professor_id = professor_id;
+    }
+
+    public List<User> getStudents(){
         return students;
     }
 
     public void setStudents(List<User> students) {
         this.students = students;
     }
+
 }
