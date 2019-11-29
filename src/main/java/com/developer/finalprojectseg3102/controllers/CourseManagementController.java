@@ -49,31 +49,53 @@ public class CourseManagementController extends BaseController {
     // TODO: Very inefficient code .. it works tho. Might fix it later
     @RequestMapping(value = "/course", params = "section_id")
     public String course(@RequestParam ("section_id") String section_id, @ModelAttribute Section section, Model model, HttpSession session) throws Exception {
+        // Check if user has a team
+        Boolean hasTeam = false;
+        Boolean isStudent = false;
+
         section = SectionDAO.retrieve(Long.parseLong(section_id));
         model.addAttribute("section", section);
         model.addAttribute("courseInfo", sectionFullName(Long.parseLong(section_id)));
         User current_user = (User) session.getAttribute("user");
 
-        Team team = studentTeamBasedOnSection(current_user.getUser_id(), section.getSection_id());
-        model.addAttribute("team", team);
+        if((current_user.getAccountType()).equals("professor")){
+            isStudent = false;
+            hasTeam = false;
 
-        // If User has no team
-        List<Team> availableTeams = new ArrayList<>();
-        List<Team> allTeams = TeamDAO.retrieveTeams();
-        for(int i = 0; i<allTeams.size(); i++){
+            List<Team> sectionTeams = sectionTeams(section.getSection_id());
+            model.addAttribute("sectionTeams", sectionTeams);
+        }
 
-            int max = (allTeams.get(i)).getMax_capacity();
-            List<User> teamMembers = TeamDAO.retrieveTeamMembers((allTeams.get(i)).getTeam_id());
+        // User is a student
+        else{
+            isStudent = true;
+            Team team = studentTeamBasedOnSection(current_user.getUser_id(), section.getSection_id());
+            // User has a team
+            if(team != null && team.getTeam_id() != 0){
+                hasTeam = true;
+                model.addAttribute("team", team);
+            }
 
-            if(max > teamMembers.size()){
-                availableTeams.add(allTeams.get(i));
+            // user has no team
+            else{
+                hasTeam = false;
+                List<Team> availableTeams = new ArrayList<>();
+                List<Team> allTeams = TeamDAO.retrieveTeams();
+                for(int i = 0; i<allTeams.size(); i++){
+
+                    int max = (allTeams.get(i)).getMax_capacity();
+                    List<User> teamMembers = TeamDAO.retrieveTeamMembers((allTeams.get(i)).getTeam_id());
+
+                    if(max > teamMembers.size()){
+                        availableTeams.add(allTeams.get(i));
+                    }
+                }
+                model.addAttribute("availableTeams", availableTeams);
             }
         }
-        model.addAttribute("availableTeams", availableTeams);
 
-        // Check if user has a team
-        Boolean hasTeam = (team != null && team.getTeam_id() != 0);
         model.addAttribute("hasTeam", hasTeam);
+        model.addAttribute("isStudent", isStudent);
         return "course";
     }
 

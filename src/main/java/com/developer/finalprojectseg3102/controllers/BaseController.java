@@ -100,4 +100,19 @@ public class BaseController {
 		return (new Team());
 	}
 
+	public List<Team> sectionTeams(long section_id) throws Exception {
+		// Get all the teams
+		List<Team> allTeams = TeamDAO.retrieveTeams();
+		List<Team> sectionTeams = new ArrayList<>();
+		// Get all the teams that belong to a section
+		for(int i = 0; i<allTeams.size(); i++){
+			Team team = allTeams.get(i);
+			// If it belongs to the section we want
+			if(team.getSection_id() == section_id){
+				sectionTeams.add(team);
+			}
+		}
+		return sectionTeams;
+	}
+
 }
