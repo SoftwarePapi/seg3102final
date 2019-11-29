@@ -39,10 +39,10 @@ public class UserDAO extends BaseDAO {
 		con.setDoOutput(true);
 		
 		str.append("{");
-		str.append("\"account_type\"" + ":" + "\"" + user.getAccountType() + "\",");
+		str.append("\"account_type\"" + ":" + "\"" + user.getAccount_type() + "\",");
 		str.append("\"first_name\"" + ":" + "\"" + user.getFirstName() + "\",");
 		str.append("\"last_name\"" + ":" + "\"" + user.getLastName() + "\",");
-		str.append("\"indentification_number\"" + ":" + "\"" + user.getIdentificationNumber() + "\",");
+		str.append("\"indentification_number\"" + ":" + "\"" + user.getIdentification_number() + "\",");
 		str.append("\"program\"" + ":" + "\"" + user.getProgram() + "\",");
 		str.append("\"email\"" + ":" + "\"" + user.getEmail() + "\",");
 		str.append("\"password\"" + ":" + "\"" + user.getPassword() + "\"}");
@@ -60,7 +60,6 @@ public class UserDAO extends BaseDAO {
 			}
 		}
 		con.disconnect();
-
 	}
 	public static User retrieve(Long id) throws Exception{
 
@@ -85,11 +84,11 @@ public class UserDAO extends BaseDAO {
 
 			User user = new User();
 			// Create this method
-			user.setUser_id(((Long) jsonObj.get("user_id")).intValue());
-			user.setAccountType((String) jsonObj.get("account_type"));
+			user.setUser_id(((Long) jsonObj.get("user_id")));
+			user.setAccount_type((String) jsonObj.get("account_type"));
 			user.setFirstName((String) jsonObj.get("first_name"));
 			user.setLastName((String) jsonObj.get("last_name"));
-			user.setIdentificationNumber((Long) jsonObj.get("indentification_number"));
+			user.setIdentification_number((Long) jsonObj.get("indentification_number"));
 			user.setProgram((String) jsonObj.get("program"));
 			user.setEmail((String) jsonObj.get("email"));
 			user.setPassword((String) jsonObj.get("password"));
@@ -133,10 +132,10 @@ public class UserDAO extends BaseDAO {
 
 				// Create this method
 				// user.setUserId(row.get("user_id"));
-				user.setAccountType((String) row.get("account_type"));
+				user.setAccount_type((String) row.get("account_type"));
 				user.setFirstName((String) row.get("first_name"));
 				user.setLastName((String) row.get("last_name"));
-				user.setIdentificationNumber((Long) row.get("indentification_number"));
+				user.setIdentification_number((Long) row.get("indentification_number"));
 				user.setProgram((String) row.get("program"));
 				user.setEmail((String) row.get("email"));
 				user.setPassword((String) row.get("password"));

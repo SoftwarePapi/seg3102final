@@ -4,10 +4,10 @@ import java.util.List;
 
 public class User {
 
-	private long user_id;
+	private Long user_id;
 	private String firstName;
 	private String lastName;
-	private long identification_number;
+	private Long identification_number;
 	private String email;
 	private String account_type;
 	private String program;
@@ -19,23 +19,11 @@ public class User {
 	public User() {
 	}
 
-	public User(long user_id, String firstName, String lastName, long identification_number, String email, String account_type, String program, String password, List<Team> teams) {
-		this.user_id = user_id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.identification_number = identification_number;
-		this.email = email;
-		this.account_type = account_type;
-		this.program = program;
-		this.password = password;
-		this.teams = teams;
-	}
-
-	public long getUser_id() {
+	public Long getUser_id() {
 		return user_id;
 	}
 
-	public void setUser_id(long user_id) {
+	public void setUser_id(Long user_id) {
 		this.user_id = user_id;
 	}
 
@@ -51,24 +39,31 @@ public class User {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public long getIdentificationNumber() {
-		return identification_number;
-	}
-	public void setIdentificationNumber(long identification_number) {
-		this.identification_number = identification_number;
-	}
+	
+	
 	public String getEmail() {
 		return email;
 	}
+	public Long getIdentification_number() {
+		return identification_number;
+	}
+
+	public void setIdentification_number(Long identification_number) {
+		this.identification_number = identification_number;
+	}
+
+	public String getAccount_type() {
+		return account_type;
+	}
+
+	public void setAccount_type(String account_type) {
+		this.account_type = account_type;
+	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getAccountType() {
-		return account_type;
-	}
-	public void setAccountType(String account_type) {
-		this.account_type = account_type;
-	}
+	
 	public String getProgram() {
 		return program;
 	}
