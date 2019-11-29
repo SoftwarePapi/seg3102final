@@ -46,6 +46,10 @@ public class BaseController {
 		return UserDAO.retrieveStudentSections(user_id);
 	}
 
+	public List<Section> getProfessorSections(long user_id) throws Exception {
+		return UserDAO.retrieveProfessorSections(user_id);
+	}
+
 	public String sectionFullName(Long section_id) throws Exception {
 		Section section = SectionDAO.retrieve(section_id);
 		Course course = CourseDAO.retrieve(section.getCourse_id());
