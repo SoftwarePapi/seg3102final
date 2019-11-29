@@ -52,7 +52,7 @@ public class TeamManagementController extends BaseController{
     }
 
     @RequestMapping(value = "/team", params = "team_id")
-    public String course(@RequestParam("team_id") String team_id, @ModelAttribute Team team, Model model, HttpSession session) throws Exception {
+    public String team(@RequestParam("team_id") String team_id, @ModelAttribute Team team, Model model, HttpSession session) throws Exception {
         team = TeamDAO.retrieve(Long.parseLong(team_id));
         model.addAttribute("team", team);
 
