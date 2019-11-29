@@ -65,11 +65,21 @@ public class LoginController extends BaseController {
 			model.addAttribute("user", current_user);
 			HashMap<String, Section> sectionsMap = new HashMap<String, Section>();
 
-			List<Section> sections = getStudentSections(current_user.getUser_id());
-
-			for(int i=0; i<sections.size(); i++){
-				sectionsMap.put(sectionFullName(sections.get(i).getSection_id()), sections.get(i));
+			List<Section> userSections = new ArrayList<>();
+			// If user is professor, return sections the prof teaches
+			if((current_user.getAccountType()).equals("professor")){
+				userSections = getProfessorSections(current_user.getUser_id());
 			}
+
+			// If user is student, return sections the user is enrolled in
+			else{
+				userSections = getStudentSections(current_user.getUser_id());
+			}
+
+			for(int i=0; i< userSections.size(); i++){
+				sectionsMap.put(sectionFullName(userSections.get(i).getSection_id()), userSections.get(i));
+			}
+			session.setAttribute("userSection", sectionsMap);
 			model.addAttribute("sections", sectionsMap);
 			return "index";
 		} else {

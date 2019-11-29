@@ -66,13 +66,4 @@ public class TeamManagementController extends BaseController{
         model.addAttribute("captain", captain.fullName());
         return "team";
     }
-
-    @RequestMapping(value="/thread")
-    public String getThreadPage(Model model, HttpSession session) {
-        return "thread";
-    }
-
-
-
-
 }
