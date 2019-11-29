@@ -41,7 +41,7 @@ public class TeamDAO extends BaseDAO{
             Team team = new Team();
 
             team.setTeam_id((Long)jsonObj.get("team_id"));
-            team.setTeamName((String)jsonObj.get("team_name"));
+            team.setTeam_name((String)jsonObj.get("team_name"));
 //            team.setCreation_date((Timestamp)jsonObj.get("creation_date"));
             team.setCaptain_id((Long)jsonObj.get("captain"));
             team.setStatus((String)jsonObj.get("status"));
@@ -82,7 +82,7 @@ public class TeamDAO extends BaseDAO{
                 Team team = new Team();
 
                 team.setTeam_id((Long)row.get("team_id"));
-                team.setTeamName((String)row.get("team_name"));
+                team.setTeam_name((String)row.get("team_name"));
 //                team.setCreation_date((Timestamp)row.get("creation_date"));
                 team.setCaptain_id((Long)row.get("captain"));
                 team.setStatus((String)row.get("status"));

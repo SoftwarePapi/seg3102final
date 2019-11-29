@@ -37,7 +37,7 @@
 		<div class="columns">
 		  	<div class="column">
 				<tr th:each="section: ${sections}">
-					<td th:text="${section.section_name}" /><br>
+						<a th:text="${section.key}" th:href="@{/course/(section_id = ${section.value.section_id})}" th:class="coursestyle"/><br>
 				</tr>
 		     <a href="course"  class="coursestyle">???Course code and section</a>
 		     <p></p>
