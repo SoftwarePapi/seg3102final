@@ -1,7 +1,9 @@
 package com.developer.finalprojectseg3102.controllers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -61,15 +63,21 @@ public class LoginController extends BaseController {
 		if (isLoggedIn(session)) {
 			User current_user = (User) session.getAttribute("user");
 			model.addAttribute("user", current_user);
+			HashMap<String, Section> sectionsMap = new HashMap<String, Section>();
+
 			List<Section> sections = getStudentSections(current_user.getUser_id());
-			model.addAttribute("sections", sections);
+
+			for(int i=0; i<sections.size(); i++){
+				sectionsMap.put(sectionFullName(sections.get(i).getSection_id()), sections.get(i));
+			}
+			model.addAttribute("sections", sectionsMap);
 			return "index";
 		} else {
 			return "login";
 		}
 	}
 
-	public List<Section> getStudentSections(long user_id) throws Exception {
-		return UserDAO.retrieveStudentSections(user_id);
-	}
+
+
+
 }

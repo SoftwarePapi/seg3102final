@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
@@ -50,30 +51,27 @@ public class TeamManagementController extends BaseController{
 
     }
 
+    @RequestMapping(value = "/team", params = "team_id")
+    public String course(@RequestParam("team_id") String team_id, @ModelAttribute Team team, Model model, HttpSession session) throws Exception {
+        team = TeamDAO.retrieve(Long.parseLong(team_id));
+        model.addAttribute("team", team);
+
+        List<User> members = TeamDAO.retrieveTeamMembers(team.getTeam_id());
+        List<String> member_names = new ArrayList<>();
+        for(int i=0; i<members.size(); i++){
+            member_names.add((members.get(i)).fullName());
+        }
+        model.addAttribute("members", member_names);
+        User captain = UserDAO.retrieve(team.getCaptain_id());
+        model.addAttribute("captain", captain.fullName());
+        return "team";
+    }
+
     @RequestMapping(value="/thread")
     public String getThreadPage(Model model, HttpSession session) {
         return "thread";
     }
 
-    public List<Team> getStudentTeams(Long user_id) throws Exception {
-        return UserDAO.retrieveStudentTeams(user_id);
-    }
-
-    public List<User> getTeamMembers(Long team_id) throws Exception {
-        Team team = TeamDAO.retrieve(team_id);
-        List<User> members = TeamDAO.retrieveTeamMembers(team.getTeam_id());
-        return members;
-    }
-    public User getTeamCaptain(Long team_id) throws Exception {
-        Team team = TeamDAO.retrieve(team_id);
-        User user = UserDAO.retrieve(team.getCaptain_id());
-        return user;
-    }
-
-    public Section getTeamSection(Long team_id) throws Exception {
-        Team team = TeamDAO.retrieve(team_id);
-        return SectionDAO.retrieve(team.getSection_id());
-    }
 
 
 

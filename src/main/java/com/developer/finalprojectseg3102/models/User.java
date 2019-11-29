@@ -110,4 +110,8 @@ public class User {
 	public String toString() {
 		return getEmail();
 	}
+
+	public String fullName(){
+		return (this.firstName + " " + this.lastName);
+	}
 }

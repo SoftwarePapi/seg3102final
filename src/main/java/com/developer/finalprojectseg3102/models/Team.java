@@ -39,12 +39,14 @@ public class Team {
 		this.team_id = team_id;
 	}
 
-	public String getTeamName() {
+	public String getTeam_name() {
 		return team_name;
 	}
-	public void setTeamName(String team_name) {
+
+	public void setTeam_name(String team_name) {
 		this.team_name = team_name;
 	}
+
 	public List<User> getMemberList() {
 		return members;
 	}
