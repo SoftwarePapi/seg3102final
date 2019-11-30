@@ -65,6 +65,14 @@ public class TeamManagementController extends BaseController{
         model.addAttribute("members", member_names);
         User captain = UserDAO.retrieve(team.getCaptain_id());
         model.addAttribute("captain", captain.fullName());
+        User current_user = (User)session.getAttribute("user");
+        boolean hasRequested = checkJoinRequestSent(current_user.getUser_id(), Long.parseLong(team_id));
+        session.setAttribute("hasRequested", hasRequested);
+
+        model.addAttribute("hasRequested", hasRequested);
+        model.addAttribute("hasTeams" , session.getAttribute("hasTeam"));
+        model.addAttribute("isStudent" , session.getAttribute("isStudent"));
+
         return "team";
     }
 
@@ -78,6 +86,13 @@ public class TeamManagementController extends BaseController{
 
         // Add the request to the request tables
         TeamDAO.addJoinRequest(user_id, team_id);
+
+        Boolean hasRequested = checkJoinRequestSent(user_id, team_id);
+        session.setAttribute("hasRequested", hasRequested);
+
+        model.addAttribute("hasRequested", hasRequested);
+        model.addAttribute("hasTeam" , session.getAttribute("hasTeam"));
+        model.addAttribute("isStudent" , session.getAttribute("isStudent"));
 
         return "team";
     }

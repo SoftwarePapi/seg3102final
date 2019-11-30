@@ -155,7 +155,7 @@ public class TeamDAO extends BaseDAO{
             for (int i = 0; i < jsonArray.size(); i++) {
                 JSONObject row = (JSONObject) jsonArray.get(i);
                 if (row.get("team_id") == team_id) {
-                    User student = UserDAO.retrieve((Long) row.get("user_id"));
+                    User student = UserDAO.retrieve((Long) row.get("student_id"));
                     join_requests.add(student);
                 }
             }

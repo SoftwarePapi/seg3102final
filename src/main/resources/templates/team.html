@@ -42,16 +42,21 @@
 				 </div>
 				 <div class="columns">
 				 	<div class="column"> 
-				     <p class="teamstyle buttonpadding">Team Members</p>
-				     <button type="button">Add Members</button>
-				     <button type="button">Edit</button>
-
-					<form action="#" method="post" th:action="@{/join-team}" th:object="${Team}" autocomplete="off">
-						<input type="text" th:name="course_code" placeholder="Course Code">
-
-						<input type="submit" value="Create Course">
-					</form>
-
+						 <p class="teamstyle buttonpadding">Team Members</p>
+						 <button type="button">Add Members</button>
+						 <button type="button">Edit</button>
+						<div th:if="${isStudent}">
+							<div th:unless="${hasTeam}">
+								<div th:if="${hasRequested}">
+									<button type="button" class="greenButton">Join Request Sent</button>
+								</div>
+								<div th:unless="${hasRequested}">
+									<form action="#" method="post" th:action="@{/join-team}" th:object="${team}" autocomplete="off">
+										<input type="submit" value="Request To Join" class="button">
+									</form>
+								</div>
+							</div>
+						</div>
 					</div>
 				 </div>
 				 <div class="columns padding">
@@ -62,18 +67,18 @@
 				 	</div>
 				 </div>
 				 <div class="columns padding">
-				 	<div class="column border"> 
+				 	<div class="column border">
 				     	<a href="thread" class="teamstyle boxpadding">Thread</a>
 				     	<div class="columns">
-						 	<div class="column"> 
+						 	<div class="column">
 							     <p class="teamstyle boxpadding">???Body</p>
 							     <div class="columns commentpadding">
-								 	<div class="column border"> 
+								 	<div class="column border">
 								     <p class="teamstyle boxpadding">???comment 1</p>
 								 	</div>
 								 </div>
 								 <div class="columns commentpadding">
-								 	<div class="column border"> 
+								 	<div class="column border">
 								     <p class="teamstyle boxpadding">???comment 2</p>
 								 	</div>
 								 </div>
