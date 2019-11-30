@@ -6,6 +6,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.sql.Timestamp;
@@ -130,4 +132,65 @@ public class TeamDAO extends BaseDAO{
         }
     }
 
+    public static ArrayList<User> retrieveJoinRequests(Long team_id) throws Exception {
+        URL url = new URL(BASEURLV1 + "join_requests/?format=json");
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
+        conn.connect();
+        int responseCode = conn.getResponseCode();
+
+        if (responseCode != 200) {
+            throw new RuntimeException("HttpResponseCode: " + responseCode);
+        } else {
+            String rawJson = new String();
+            Scanner sc = new Scanner(url.openStream());
+            while (sc.hasNext()) {
+                rawJson += sc.nextLine();
+            }
+            sc.close();
+            JSONParser parser = new JSONParser();
+            JSONArray jsonArray = (JSONArray) parser.parse(rawJson);
+
+            ArrayList<User> join_requests = new ArrayList<User>();
+            for (int i = 0; i < jsonArray.size(); i++) {
+                JSONObject row = (JSONObject) jsonArray.get(i);
+                if (row.get("team_id") == team_id) {
+                    User student = UserDAO.retrieve((Long) row.get("user_id"));
+                    join_requests.add(student);
+                }
+            }
+            return join_requests;
+        }
+    }
+
+
+    public static void addJoinRequest(Long user_id, Long team_id) throws Exception {
+
+        URL url = new URL(BASEURLV1 + "join_requests/");
+
+        StringBuilder str = new StringBuilder();
+
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setDoOutput(true);
+        con.setRequestMethod("POST");
+        con.setRequestProperty("Content-Type", "application/json; UTF-8");
+        con.setRequestProperty("Accept", "application/json");
+        con.setDoOutput(true);
+
+        str.append("{");
+        str.append("\"student_id\"" + ":" + "\"" + user_id + "\",");
+        str.append("\"team_id\"" + ":" + "\"" + team_id + "\"}");
+
+        String jsonInputString = str.toString();
+        con.getOutputStream().write(jsonInputString.getBytes("UTF-8"));
+
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"))) {
+            StringBuilder response = new StringBuilder();
+            String responseLine = null;
+            while ((responseLine = br.readLine()) != null) {
+                response.append(responseLine.trim());
+            }
+        }
+        con.disconnect();
+    }
 }

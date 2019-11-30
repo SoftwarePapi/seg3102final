@@ -45,7 +45,14 @@
 				     <p class="teamstyle buttonpadding">Team Members</p>
 				     <button type="button">Add Members</button>
 				     <button type="button">Edit</button>
-				 	</div>
+
+					<form action="#" method="post" th:action="@{/join-team}" th:object="${Team}" autocomplete="off">
+						<input type="text" th:name="course_code" placeholder="Course Code">
+
+						<input type="submit" value="Create Course">
+					</form>
+
+					</div>
 				 </div>
 				 <div class="columns padding">
 				 	<div class="column border">

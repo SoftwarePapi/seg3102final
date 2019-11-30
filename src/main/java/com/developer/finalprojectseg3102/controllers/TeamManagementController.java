@@ -55,6 +55,7 @@ public class TeamManagementController extends BaseController{
     public String team(@RequestParam("team_id") String team_id, @ModelAttribute Team team, Model model, HttpSession session) throws Exception {
         team = TeamDAO.retrieve(Long.parseLong(team_id));
         model.addAttribute("team", team);
+        session.setAttribute("team", team);
 
         List<User> members = TeamDAO.retrieveTeamMembers(team.getTeam_id());
         List<String> member_names = new ArrayList<>();
@@ -66,4 +67,19 @@ public class TeamManagementController extends BaseController{
         model.addAttribute("captain", captain.fullName());
         return "team";
     }
+
+    @RequestMapping(value = "/join-team")
+    public String join_team(@ModelAttribute Team team, Model model, HttpSession session) throws Exception {
+
+        Team current_team = (Team)session.getAttribute("team");
+        long team_id = current_team.getTeam_id();
+        User user = (User)session.getAttribute("user");
+        long user_id = user.getUser_id();
+
+        // Add the request to the request tables
+        TeamDAO.addJoinRequest(user_id, team_id);
+
+        return "team";
+    }
+
 }
