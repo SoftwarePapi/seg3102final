@@ -36,8 +36,8 @@ public class LoginController extends BaseController {
 			} else {
 				ArrayList<User> userList = UserDAO.retrieveUsers();
 
-				for (int i = 0; i < userList.size(); i++) {
-					if (user.getEmail() != null && user.getPassword() != null) {
+				if (user.getEmail() != null && user.getPassword() != null) {
+					for (int i = 0; i < userList.size(); i++) {
 						if (user.getEmail().equals(userList.get(i).getEmail())
 								&& user.getPassword().equals(userList.get(i).getPassword())) {
 							session.setAttribute("loggedIn", true);

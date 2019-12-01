@@ -130,8 +130,7 @@ public class UserDAO extends BaseDAO {
 				JSONObject row = (JSONObject) jsonArray.get(i);
 				User user = new User();
 
-				// Create this method
-				// user.setUserId(row.get("user_id"));
+				user.setUser_id((Long)row.get("user_id"));
 				user.setAccount_type((String) row.get("account_type"));
 				user.setFirstName((String) row.get("first_name"));
 				user.setLastName((String) row.get("last_name"));
