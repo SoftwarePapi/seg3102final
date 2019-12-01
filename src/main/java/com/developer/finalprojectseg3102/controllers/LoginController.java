@@ -69,7 +69,7 @@ public class LoginController extends BaseController {
 
 			List<Section> userSections = new ArrayList<>();
 			// If user is professor, return sections the prof teaches
-			if((current_user.getAccountType()).equals("professor")){
+			if((current_user.getAccount_type()).equals("professor")){
 				userSections = getProfessorSections(current_user.getUser_id());
 			}
 

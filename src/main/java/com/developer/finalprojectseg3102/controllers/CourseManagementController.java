@@ -58,7 +58,7 @@ public class CourseManagementController extends BaseController {
         model.addAttribute("courseInfo", sectionFullName(Long.parseLong(section_id)));
         User current_user = (User) session.getAttribute("user");
 
-        if((current_user.getAccountType()).equals("professor")){
+        if((current_user.getAccount_type()).equals("professor")){
             isStudent = false;
             hasTeam = false;
 
