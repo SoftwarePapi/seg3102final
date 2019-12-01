@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Parastoo on 11/25/2019.
@@ -70,8 +72,20 @@ public class TeamManagementController extends BaseController{
         session.setAttribute("hasRequested", hasRequested);
 
         model.addAttribute("hasRequested", hasRequested);
-        model.addAttribute("hasTeams" , session.getAttribute("hasTeam"));
+        model.addAttribute("hasTeam" , session.getAttribute("hasTeam"));
         model.addAttribute("isStudent" , session.getAttribute("isStudent"));
+
+        // If the user logged in is the captain of the team, display the join requests
+        boolean isCaptain = isCaptainOfTeam(current_user.getUser_id(), team.getTeam_id());
+        model.addAttribute("isCaptain", isCaptain);
+
+        List<User> joinRequestsUser = TeamDAO.retrieveJoinRequests(team.getTeam_id());
+        Map<String,User> joinRequests = new HashMap<>();
+        for(int i= 0; i< joinRequestsUser.size(); i++){
+            User user = joinRequestsUser.get(i);
+            joinRequests.put(user.fullName(), user);
+        }
+        model.addAttribute("joinRequests", joinRequests);
 
         return "team";
     }
@@ -95,6 +109,17 @@ public class TeamManagementController extends BaseController{
         model.addAttribute("isStudent" , session.getAttribute("isStudent"));
 
         return "team";
+    }
+
+    @RequestMapping(value = "/confirm-join", params = "user_id")
+    public String confirm_join(@RequestParam("user_id") String user_id, Model model, HttpSession session) throws Exception {
+
+        Team current_team = (Team)session.getAttribute("team");
+        User user = UserDAO.retrieve(Long.parseLong(user_id));
+        TeamDAO.addTeamMember(user.getUser_id(), current_team.getTeam_id());
+
+        return "team";
+
     }
 
 }

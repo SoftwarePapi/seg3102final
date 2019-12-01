@@ -127,4 +127,11 @@ public class BaseController {
 		return false;
 	}
 
+	public boolean isCaptainOfTeam(long user_id, long team_id) throws Exception {
+		Team team = TeamDAO.retrieve(team_id);
+		boolean isCaptain = (team.getCaptain_id() == user_id);
+		return isCaptain;
+	}
+
+
 }

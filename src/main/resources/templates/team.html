@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-
+<link href="/fontawesome-free-5.11.2-web\css\all.css" rel="stylesheet" />
 <head>
 	<title>???Team</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -39,7 +39,20 @@
 				 	<div class="column"> 
 				     <p class="teamstyle">Captain: <span th:text="${captain}"></span></p>
 				 	</div>
+					<div class="column">
+						<p>Join Requests</p>
+
+							<tr th:each="student: ${joinRequests}">
+								<div class="column border">
+									<form action="#" method="post" th:action="@{/confirm-join/(user_id = ${student.value.user_id})}">
+										<i class="fas fa-check-square"><input type="submit" th:value="${student.key}" class="button"></i>
+									</form>
+								</div>
+							</tr>
+						</div>
+					</div>
 				 </div>
+		</div>
 				 <div class="columns">
 				 	<div class="column"> 
 						 <p class="teamstyle buttonpadding">Team Members</p>
@@ -66,6 +79,9 @@
 						</tr>
 				 	</div>
 				 </div>
+
+
+
 				 <div class="columns padding">
 				 	<div class="column border">
 				     	<a href="thread" class="teamstyle boxpadding">Thread</a>
