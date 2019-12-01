@@ -32,12 +32,12 @@
 	
 	<div>
 	
-		<a class="title">???Team</a>
+		<a th:text="${team?.team_name}" th:class="title"/>
 		<div class="columns">
 		 	<div class="column"> 
 				<div class="columns">
 				 	<div class="column"> 
-				     <p class="teamstyle">Captain: ???name</p>
+				     <p class="teamstyle">Captain: <span th:text="${captain}"></span></p>
 				 	</div>
 				 </div>
 				 <div class="columns">
@@ -48,8 +48,10 @@
 				 	</div>
 				 </div>
 				 <div class="columns padding">
-				 	<div class="column border"> 
-				     <p class="teamstyle boxpadding">???team members</p>
+				 	<div class="column border">
+						<tr th:each="member: ${members}">
+							<td th:text="${member}"/><br>
+						</tr>
 				 	</div>
 				 </div>
 				 <div class="columns padding">

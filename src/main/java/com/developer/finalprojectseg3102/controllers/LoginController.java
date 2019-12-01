@@ -1,7 +1,9 @@
 package com.developer.finalprojectseg3102.controllers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -63,8 +65,24 @@ public class LoginController extends BaseController {
 		if (isLoggedIn(session)) {
 			User current_user = (User) session.getAttribute("user");
 			model.addAttribute("user", current_user);
-			List<Section> sections = getStudentSections(current_user.getUser_id());
-			model.addAttribute("sections", sections);
+			HashMap<String, Section> sectionsMap = new HashMap<String, Section>();
+
+			List<Section> userSections = new ArrayList<>();
+			// If user is professor, return sections the prof teaches
+			if((current_user.getAccountType()).equals("professor")){
+				userSections = getProfessorSections(current_user.getUser_id());
+			}
+
+			// If user is student, return sections the user is enrolled in
+			else{
+				userSections = getStudentSections(current_user.getUser_id());
+			}
+
+			for(int i=0; i< userSections.size(); i++){
+				sectionsMap.put(sectionFullName(userSections.get(i).getSection_id()), userSections.get(i));
+			}
+			session.setAttribute("userSection", sectionsMap);
+			model.addAttribute("sections", sectionsMap);
 			return "index";
 		} else {
 			return "login";

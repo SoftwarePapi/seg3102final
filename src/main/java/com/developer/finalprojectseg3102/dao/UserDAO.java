@@ -178,6 +178,39 @@ public class UserDAO extends BaseDAO {
 		}
 	}
 
+	public static ArrayList<Section> retrieveProfessorSections(Long user_id) throws Exception{
+
+		URL url = new URL(BASEURLV1 + "sections/?format=json");
+		HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+		conn.setRequestMethod("GET");
+		conn.connect();
+		int responseCode = conn.getResponseCode();
+
+		if(responseCode != 200){
+			throw new RuntimeException("HttpResponseCode: " + responseCode);
+		}
+		else{
+			String rawJson = new String();
+			Scanner sc = new Scanner(url.openStream());
+			while(sc.hasNext()){
+				rawJson += sc.nextLine();
+			}
+			sc.close();
+			JSONParser parser = new JSONParser();
+			JSONArray jsonArray = (JSONArray) parser.parse(rawJson);
+
+			ArrayList<Section> professor_sections = new ArrayList<Section>();
+			for(int i=0; i < jsonArray.size(); i++){
+				JSONObject row = (JSONObject)jsonArray.get(i);
+				if(row.get("professor") == user_id){
+
+					Section section = SectionDAO.retrieve((Long)row.get("section_id"));
+					professor_sections.add(section);
+				}
+			}
+			return professor_sections;
+		}
+	}
 	public static ArrayList<Team> retrieveStudentTeams(Long user_id) throws Exception{
 
 		URL url = new URL(BASEURLV1 + "team_members/?format=json");
@@ -211,5 +244,4 @@ public class UserDAO extends BaseDAO {
 			return student_teams;
 		}
 	}
-
 }
