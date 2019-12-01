@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layouts/layout}">
+
+<div th:fragment="navbar">
+	<nav class="navbar navbackground">
+		<div class="navbar-start">
+			<a href="#" class="navbar-item navstyle"> <img
+				src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+			</a>
+		</div>
+
+		<div class="navbar-end">
+			<form action="#" method="post" th:action="@{/logout}"
+				th:object="${User}" autocomplete="off">
+				<input type="submit" value="LOGOUT" id="logout" class="logout" th:name="logout"
+					placeholder="LOGOUT"> 
+			</form>
+
+		</div>
+	</nav>
+</div>
