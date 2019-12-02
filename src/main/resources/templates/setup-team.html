@@ -5,6 +5,7 @@
     <title>Title</title>
 </head>
 <body>
+<div th:insert="navbar :: navbar"></div>
 
     <form action="#" method="post" th:action="@{/setup-team}" th:object="${Course}" autocomplete="off">
         <input type="text" th:name="course_code" placeholder="Course Code">
