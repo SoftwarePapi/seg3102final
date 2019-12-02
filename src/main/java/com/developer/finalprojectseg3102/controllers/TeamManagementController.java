@@ -23,21 +23,23 @@ import java.util.List;
  */
 @Controller
 public class TeamManagementController extends BaseController{
-    private int min = 0;
-    private int max = 0;
-    private Timestamp creation_date;
 
-
-    @RequestMapping(value = "/setup-teams")
-    public String createTeam(@ModelAttribute int min, int max, Timestamp creation_date, Model model, HttpSession session) throws Exception {
-        //Also check if the user is admin: current_user.isAdmin()
-
-        this.min = min;
-        this.max = max;
-        this.creation_date = creation_date;
-
-        return "course";
+    @RequestMapping(value = "/setup-team")
+    public String setupTeam(Model model, HttpSession session) throws Exception {
+        return "setup-team";
     }
+
+    @RequestMapping(value = "/set-params")
+    public String setParams(@ModelAttribute Team team, Model model, HttpSession session) throws Exception {
+
+        Singleton param = Singleton.getInstance();
+        param.min = team.getMin_capacity();
+        param.max = team.getMax_capacity();
+        System.out.println(param.min);
+        System.out.println(param.max);
+        return "setup-team";
+    }
+
 
     @RequestMapping(value="/course")
     public String getCoursePage(Model model, HttpSession session) {
