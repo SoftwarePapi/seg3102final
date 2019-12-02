@@ -1,8 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<link href="/fontawesome-free-5.11.2-web\css\all.css" rel="stylesheet" />
 <head>
-	<title>???Team</title>
+	<title>Teams</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	
 	
@@ -42,16 +41,14 @@
 					<div class="column">
 						<p>Join Requests</p>
 
+						<div class="column border">
 							<tr th:each="student: ${joinRequests}">
-								<div class="column border">
-									<form action="#" method="post" th:action="@{/confirm-join/(user_id = ${student.value.user_id})}">
-										<i class="fas fa-check-square"><input type="submit" th:value="${student.key}" class="button"></i>
-									</form>
-								</div>
+								<a  th:text="${student.key}" th:href="@{/confirm-join/(user_id = ${student.value.user_id})}" th:class="teamstyle" /><br>
 							</tr>
 						</div>
 					</div>
-				 </div>
+				</div>
+			</div>
 		</div>
 				 <div class="columns">
 				 	<div class="column"> 
@@ -84,26 +81,22 @@
 
 				 <div class="columns padding">
 				 	<div class="column border">
-				     	<a href="thread" class="teamstyle boxpadding">Thread</a>
+				     	<a th:href="@{/thread}" th:text="${thread.title}">Thread</a>
 				     	<div class="columns">
 						 	<div class="column">
-							     <p class="teamstyle boxpadding">???Body</p>
+								<p th:text="${thread.body_text}">Body</p>
 							     <div class="columns commentpadding">
 								 	<div class="column border">
-								     <p class="teamstyle boxpadding">???comment 1</p>
+										<p th:text="${comment.body_text}">comment 1</p>
 								 	</div>
 								 </div>
-								 <div class="columns commentpadding">
-								 	<div class="column border">
-								     <p class="teamstyle boxpadding">???comment 2</p>
-								 	</div>
-								 </div>
-								 <p></p>
+								 <br>
 						 	</div>
 						 </div>
 				 	</div>
 				 </div>
 			</div>
 		</div>
+	<br><br>
 	</div>
 </body>
