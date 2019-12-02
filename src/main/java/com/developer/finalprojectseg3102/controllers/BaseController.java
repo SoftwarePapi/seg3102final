@@ -115,4 +115,23 @@ public class BaseController {
 		return sectionTeams;
 	}
 
+	public boolean checkJoinRequestSent(long user_id, long team_id) throws Exception {
+		ArrayList<User> users = TeamDAO.retrieveJoinRequests(team_id);
+
+		for(int i = 0; i< users.size(); i++){
+
+			if(users.get(i).getUser_id() == user_id){
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean isCaptainOfTeam(long user_id, long team_id) throws Exception {
+		Team team = TeamDAO.retrieve(team_id);
+		boolean isCaptain = (team.getCaptain_id() == user_id);
+		return isCaptain;
+	}
+
+
 }

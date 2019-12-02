@@ -22,31 +22,6 @@ import static com.developer.finalprojectseg3102.controllers.BaseController.isLog
 @Controller
 public class CourseManagementController extends BaseController {
 
-    @RequestMapping(value = "/create-course")
-    public String createCourse(@ModelAttribute Course course, Model model, HttpSession session) {
-        //Also check if the user is admin: current_user.isAdmin()
-        if (isLoggedIn(session)){
-            model.addAttribute(course);
-
-//            if (course.getCourseCode() != null){
-//                CourseDAO.create(course);
-//            }
-            return "admin-course";
-        }
-        else{
-            return "login";
-        }
-    }
-
-    @RequestMapping(value = "/admin-course")
-    public String adminCourse(@ModelAttribute Course course, Model model, HttpSession session) throws Exception {
-        //Also check if the user is admin: current_user.isAdmin()
-        ArrayList<Course> courses = CourseDAO.retrieveCourses();
-        model.addAttribute("courses", courses);
-        return "admin-course";
-    }
-
-    // TODO: Very inefficient code .. it works tho. Might fix it later
     @RequestMapping(value = "/course", params = "section_id")
     public String course(@RequestParam ("section_id") String section_id, @ModelAttribute Section section, Model model, HttpSession session) throws Exception {
         // Check if user has a team
@@ -96,6 +71,10 @@ public class CourseManagementController extends BaseController {
 
         model.addAttribute("hasTeam", hasTeam);
         model.addAttribute("isStudent", isStudent);
+        
+        session.setAttribute("hasTeam", hasTeam);
+        session.setAttribute("isStudent", isStudent);
+
         return "course";
     }
 
