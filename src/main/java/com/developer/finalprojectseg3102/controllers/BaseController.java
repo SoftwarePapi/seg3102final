@@ -1,5 +1,10 @@
 package com.developer.finalprojectseg3102.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import com.developer.finalprojectseg3102.dao.CourseDAO;
 import com.developer.finalprojectseg3102.dao.SectionDAO;
 import com.developer.finalprojectseg3102.dao.TeamDAO;
@@ -9,19 +14,21 @@ import com.developer.finalprojectseg3102.models.Section;
 import com.developer.finalprojectseg3102.models.Team;
 import com.developer.finalprojectseg3102.models.User;
 
-import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 public class BaseController {
+	
+	/*
+	 * Log in check and basic functionality
+	 */
 	
 	protected static Boolean isLoggedIn(HttpSession session) {
 		return session.getAttribute("loggedIn")!= null || 
 		(session.getAttribute("loggedIn")!= null && session.getAttribute("loggedIn").equals(true));
 	}
-
+	
+	/*
+	 * Service Layer Methods (TEMP)
+	 */
+	
 	public List<Team> getStudentTeams(Long user_id) throws Exception {
 		return UserDAO.retrieveStudentTeams(user_id);
 	}
@@ -73,7 +80,6 @@ public class BaseController {
 		Course course = CourseDAO.retrieve(section.getCourse_id());
 		return course;
 	}
-
 
 	public List<User> getSectionsStudents(Long section_id) throws Exception {
 		return SectionDAO.retrieveSectionStudents(section_id);
