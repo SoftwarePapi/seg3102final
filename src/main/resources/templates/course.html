@@ -67,7 +67,7 @@
 							<p class="teamtitlestyle">All Teams</p>
 							<br>
 							<tr th:each="team: ${sectionTeams}" th:class="teamstyle">
-								<td th:text="${team.team_name}" th:class="teamstyle"/><br>
+								<a  th:text="${team?.team_name}" th:href="@{/team/(team_id = ${team.team_id})}" th:class="teamstyle" /><br>
 							</tr>
 						</div>
 					</div>

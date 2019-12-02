@@ -1,8 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
-	<title>???Team</title>
+	<title>Teams</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	
 	
@@ -39,13 +38,36 @@
 				 	<div class="column"> 
 				     <p class="teamstyle">Captain: <span th:text="${captain}"></span></p>
 				 	</div>
-				 </div>
+					<div class="column">
+						<p>Join Requests</p>
+
+						<div class="column border">
+							<tr th:each="student: ${joinRequests}">
+								<a  th:text="${student.key}" th:href="@{/confirm-join/(user_id = ${student.value.user_id})}" th:class="teamstyle" /><br>
+							</tr>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 				 <div class="columns">
 				 	<div class="column"> 
-				     <p class="teamstyle buttonpadding">Team Members</p>
-				     <button type="button">Add Members</button>
-				     <button type="button">Edit</button>
-				 	</div>
+						 <p class="teamstyle buttonpadding">Team Members</p>
+						 <button type="button">Add Members</button>
+						 <button type="button">Edit</button>
+						<div th:if="${isStudent}">
+							<div th:unless="${hasTeam}">
+								<div th:if="${hasRequested}">
+									<button type="button" class="greenButton">Join Request Sent</button>
+								</div>
+								<div th:unless="${hasRequested}">
+									<form action="#" method="post" th:action="@{/join-team}" th:object="${team}" autocomplete="off">
+										<input type="submit" value="Request To Join" class="button">
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
 				 </div>
 				 <div class="columns padding">
 				 	<div class="column border">
@@ -54,28 +76,27 @@
 						</tr>
 				 	</div>
 				 </div>
+
+
+
 				 <div class="columns padding">
-				 	<div class="column border"> 
-				     	<a href="thread" class="teamstyle boxpadding">Thread</a>
+				 	<div class="column border">
+				     	<a th:href="@{/thread}" th:text="${thread.title}">Thread</a>
 				     	<div class="columns">
-						 	<div class="column"> 
-							     <p class="teamstyle boxpadding">???Body</p>
+						 	<div class="column">
+								<p th:text="${thread.body_text}">Body</p>
 							     <div class="columns commentpadding">
-								 	<div class="column border"> 
-								     <p class="teamstyle boxpadding">???comment 1</p>
+								 	<div class="column border">
+										<p th:text="${comment.body_text}">comment 1</p>
 								 	</div>
 								 </div>
-								 <div class="columns commentpadding">
-								 	<div class="column border"> 
-								     <p class="teamstyle boxpadding">???comment 2</p>
-								 	</div>
-								 </div>
-								 <p></p>
+								 <br>
 						 	</div>
 						 </div>
 				 	</div>
 				 </div>
 			</div>
 		</div>
+	<br><br>
 	</div>
 </body>
