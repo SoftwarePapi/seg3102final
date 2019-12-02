@@ -40,7 +40,7 @@ public class LoginController extends BaseController {
 
 				if (user.getEmail() != null && user.getPassword() != null) {
 					for (int i = 0; i < userList.size(); i++) {
-						if (user.getEmail().equals(userList.get(i).getEmail())
+						if (user.getEmail().toLowerCase().equals(userList.get(i).getEmail().toLowerCase())
 								&& user.getPassword().equals(userList.get(i).getPassword())) {
 							session.setAttribute("loggedIn", true);
 							User loggedInUser = new User();
