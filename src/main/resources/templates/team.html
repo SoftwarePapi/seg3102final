@@ -22,18 +22,20 @@
 							Captain: <span th:text="${captain}"></span>
 						</p>
 					</div>
-					<div class="column">
-						<p>Join Requests</p>
+					<div th:if="${isCaptain}">
+						<div class="column">
+							<p>Join Requests</p>
 
-						<div class="column border">
-							<table>
-								<tr th:each="student: ${joinRequests}">
-									<td><a th:text="${student.key}"
-										th:href="@{/confirm-join/(user_id = ${student.value.user_id})}"
-										th:class="teamstyle"></a></td>
-									<br>
-							</table>
-							</tr>
+							<div class="column border">
+								<table>
+									<tr th:each="student: ${joinRequests}">
+										<td><a th:text="${student.key}"
+											th:href="@{/confirm-join/(user_id = ${student.value.user_id})}"
+											th:class="teamstyle"></a></td>
+										<br>
+									</tr>
+								</table>
+							</div>
 						</div>
 					</div>
 				</div>
