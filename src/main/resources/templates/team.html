@@ -21,13 +21,14 @@
 				 	<div class="column"> 
 				     <p class="teamstyle">Captain: <span th:text="${captain}"></span></p>
 				 	</div>
-					<div class="column">
-						<p>Join Requests</p>
-
-						<div class="column border">
-							<tr th:each="student: ${joinRequests}">
-								<a  th:text="${student.key}" th:href="@{/confirm-join/(user_id = ${student.value.user_id})}" th:class="teamstyle" /><br>
-							</tr>
+					<div th:if="${isCaptain}">
+						<div class="column">
+							<p>Join Requests</p>
+							<div class="column border">
+								<tr th:each="student: ${joinRequests}">
+									<a  th:text="${student.key}" th:href="@{/confirm-join/(user_id = ${student.value.user_id})}" th:class="teamstyle" /><br>
+								</tr>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -36,8 +37,10 @@
 				 <div class="columns">
 				 	<div class="column"> 
 						 <p class="teamstyle buttonpadding">Team Members</p>
-						 <button type="button">Add Members</button>
-						 <button type="button">Edit</button>
+						<div th:if="${isCaptain}">
+							<button type="button">Add Members</button>
+							 <button type="button">Edit</button>
+						</div>
 						<div th:if="${isStudent}">
 							<div th:unless="${hasTeam}">
 								<div th:if="${hasRequested}">
@@ -59,9 +62,6 @@
 						</tr>
 				 	</div>
 				 </div>
-
-
-
 				 <div class="columns padding">
 				 	<div class="column border">
 				     	<a th:href="@{/thread}" th:text="${thread.title}">Thread</a>
