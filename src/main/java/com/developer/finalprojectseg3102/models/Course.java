@@ -7,7 +7,7 @@ import java.util.List;
  */
 public class Course {
 
-    private long course_id;
+    private Long course_id;
     private String course_code;
     private List<Section> sections;
 
@@ -15,7 +15,7 @@ public class Course {
 
     }
 
-    public long getCourse_id() {
+    public Long getCourse_id() {
         return course_id;
     }
 
