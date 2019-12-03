@@ -33,7 +33,7 @@ public class TeamManagementController extends BaseController{
         param.max = team.getMax_capacity();
         System.out.println(param.min);
         System.out.println(param.max);
-        return "setup-team";
+        return "redirect:/course/?section_id=" + session.getAttribute("section_id");
     }
     
     @RequestMapping(value = "/create-team")
