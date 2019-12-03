@@ -10,6 +10,11 @@
 	padding: 8px;
 }
 
+.navbar-item{
+    margin-left: 30%;
+    margin-right: 30%;
+
+}
 .textcolour{
 	color: #000000;
 }
@@ -37,4 +42,12 @@
 
 	-webkit-border-radius: 5px 5px 5px 5px;
 	border-radius: 5px 5px 5px 5px;
+}
+
+.navbar-item img {
+    max-height: 3rem;
+}
+
+.navbar-end{
+    align-items: center;
 }
