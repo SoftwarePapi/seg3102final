@@ -19,9 +19,11 @@
 		<p class="title" th:text="${thread.title}">Thread</p>
 		<div class="columns">
 			<div class="column">
-				<p class="teamstyle padding" th:text="${thread.body_text}">Body</p>
+				<p class="teamstyle padding">Description:</p>
+				<p class="teamstyle padding" th:text="${thread.body_text}"></p>
 				<div class="columns commentpadding">
 					<div class="column border">
+						<p class="teamstyle padding" th:text="${comment.author}"></p>
 						<p class="teamstyle padding" th:text="${comment.body_text}">comment 1</p>
 					</div>
 				</div>
