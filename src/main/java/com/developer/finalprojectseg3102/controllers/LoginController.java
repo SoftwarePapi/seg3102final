@@ -134,14 +134,14 @@ public class LoginController extends BaseController {
 		if (isLoggedIn(session )) {
 			session.removeAttribute("User");
 			session.removeAttribute("loggedIn");
-			return "/login";
+			return "login";
 		} else {
 			/*
 			 * any place that allows the log out option should already have a user logged in and a 
 			 * session boolean object called loggedIn, so if you're not logged in and try to log out,
 			 * that's pretty illegal, my guy
 			 */
-			return "login";
+			return "error";
 		}
 	}
 }
