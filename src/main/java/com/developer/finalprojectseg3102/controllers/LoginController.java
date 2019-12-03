@@ -141,7 +141,7 @@ public class LoginController extends BaseController {
 			 * session boolean object called loggedIn, so if you're not logged in and try to log out,
 			 * that's pretty illegal, my guy
 			 */
-			return "error";
+			return "login";
 		}
 	}
 }
