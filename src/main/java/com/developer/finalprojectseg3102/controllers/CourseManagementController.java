@@ -43,7 +43,7 @@ public class CourseManagementController extends BaseController {
             isStudent = true;
             Team team = studentTeamBasedOnSection(current_user.getUser_id(), section.getSection_id());
             // User has a team
-            if(team != null && team.getTeam_id() != 0){
+			if (team != null  && team.getTeam_id()!=null) {
                 hasTeam = true;
                 model.addAttribute("team", team);
             }

@@ -35,7 +35,6 @@
 	padding-right: 5%;
 }
 
-
 .addTeam {
 	background-color: #f6f6f6;
 	border: none;
@@ -48,6 +47,11 @@
 	margin: 5px;
 	width: 20%;
 }
+
+.teamSetup {
+	text-align: center;
+}
+
 .submitTeam {
 	background-color: #4cc7f6;
 	border: none;

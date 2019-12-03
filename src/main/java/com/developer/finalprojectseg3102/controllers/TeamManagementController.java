@@ -26,7 +26,7 @@ public class TeamManagementController extends BaseController{
 
 
     @RequestMapping(value = "/setup-teams")
-    public String setupTeams(@ModelAttribute int min, int max, Timestamp creation_date, Model model, HttpSession session) throws Exception {
+    public String setupTeams(Timestamp creation_date, Model model, HttpSession session, int min, int max) throws Exception {
         //Also check if the user is admin: current_user.isAdmin()
 
         this.min = min;
@@ -53,6 +53,11 @@ public class TeamManagementController extends BaseController{
     		createdTeam.setCaptain_id(requestedUser.getUser_id());
     		
     		TeamDAO.create(createdTeam);
+    		
+    		ArrayList<Team> allTeams = TeamDAO.retrieveTeams();
+    		
+    		//add the team id of the LAST team to be added
+    		TeamDAO.addTeamMember(createdTeam.getCaptain_id(), allTeams.get(allTeams.size()-1).getTeam_id());
     		
     		//return "course/?section_id=" + session.getAttribute("section_id");
     		return "redirect:/course/?section_id=" + session.getAttribute("section_id");

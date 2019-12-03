@@ -45,6 +45,7 @@
 				<p class="teamstyle buttonpadding">Team Members</p>
 				<button type="button">Add Members</button>
 				<button type="button">Edit</button>
+
 				<div th:if="${isStudent}">
 					<div th:unless="${hasTeam}">
 						<div th:if="${hasRequested}">
@@ -85,33 +86,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="columns padding">
-			<div class="column border">
-				<tr th:each="member: ${members}">
-					<td th:text="${member}" />
-					<br>
-				</tr>
-			</div>
-		</div>
 
-
-
-		<div class="columns padding">
-			<div class="column border">
-				<a th:href="@{/thread}" th:text="${thread.title}">Thread</a>
-				<div class="columns">
-					<div class="column">
-						<p th:text="${thread.body_text}">Body</p>
-						<div class="columns commentpadding">
-							<div class="column border">
-								<p th:text="${comment.body_text}">comment 1</p>
-							</div>
-						</div>
-						<br>
-					</div>
-				</div>
-			</div>
-		</div>
 	</div>
 	<br>
 	<br>

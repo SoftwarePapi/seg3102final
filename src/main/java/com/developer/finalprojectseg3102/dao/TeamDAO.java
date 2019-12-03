@@ -54,6 +54,7 @@ public class TeamDAO extends BaseDAO{
 			}
 		}
 		con.disconnect();
+		
 	}
 	
     public static Team retrieve(Long id) throws Exception{

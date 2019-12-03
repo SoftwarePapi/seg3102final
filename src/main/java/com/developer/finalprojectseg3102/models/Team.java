@@ -5,17 +5,17 @@ import java.util.List;
 
 public class Team {
 
-	private long team_id;
+	private Long team_id;
 	private String team_name;
 	private Timestamp creation_date;
 	private List<User> members;
 	private User captain;
-	private long captain_id;
+	private Long captain_id;
 	private String status;
-	private int min_capacity;
-	private int max_capacity;
+	private Integer min_capacity;
+	private Integer max_capacity;
 	private Section section;
-	private long section_id;
+	private Long section_id;
 
 	public Team() {
 	}
@@ -31,7 +31,7 @@ public class Team {
 		this.section = section;
 	}
 
-	public long getTeam_id() {
+	public Long getTeam_id() {
 		return team_id;
 	}
 
@@ -67,7 +67,7 @@ public class Team {
 		this.status = status;
 	}
 
-	public int getMin_capacity() {
+	public Integer getMin_capacity() {
 		return min_capacity;
 	}
 
@@ -75,7 +75,7 @@ public class Team {
 		this.min_capacity = min_capacity;
 	}
 
-	public int getMax_capacity() {
+	public Integer getMax_capacity() {
 		return max_capacity;
 	}
 
@@ -111,7 +111,7 @@ public class Team {
 		return section;
 	}
 
-	public long getSection_id() {
+	public Long getSection_id() {
 		return section_id;
 	}
 
@@ -123,7 +123,7 @@ public class Team {
 		this.section = section;
 	}
 
-	public long getCaptain_id() {
+	public Long getCaptain_id() {
 		return captain_id;
 	}
 

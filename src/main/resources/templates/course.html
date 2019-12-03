@@ -14,25 +14,22 @@
 <body>
 	<div th:insert="navbar :: navbar"></div>
 	<div>
+		<a th:text="${courseInfo}" class="teamSetup" th:class="title"></a> <a th:unless="${isStudent}" 
+		th:href="@{/setup-teams}" class=" column teamSetup">Setup Team Parameters</a>
+		<hr>
 
-		<a th:text="${courseInfo}" th:class="title"></a><br>
+				
 		<div class="columns padding">
 			<div class="column">
 				<div th:if="${isStudent}">
-					<form action="#" method="post" th:action="@{/create-team}"
-						th:object="${Team}" autocomplete="off">
-						<input th:name="team_name" type="text" class="addTeam"
-							placeholder="Enter a Team Name"> <br> <input
-							type="submit" class="submitTeam" value="Register Team">
-					</form>
-
 					<div th:if="${hasTeam}">
 						<div class="columns">
 							<div class="column">
-								<p class="teamtitlestyle">Your Teams</p>
-								<br> <a th:text="${team?.team_name}"
-									th:href="@{/team/(team_id = ${team.team_id})}"
-									th:class="teamstyle" /><br>
+								<p class="teamtitlestyle">Your Team:</p>
+								<br> <a th:if="${team.team_name}"
+									th:text="${team?.team_name}"
+									th:href="@{/team/(team_id = ${team?.team_id})}"
+									th:class="teamstyle"></a><br>
 							</div>
 						</div>
 						<br> <br>
@@ -43,76 +40,46 @@
 						</div>
 					</div>
 					<div th:unless="${hasTeam}">
+						<form action="#" method="post" th:action="@{/create-team}"
+							th:object="${Team}" autocomplete="off">
+							<input th:name="team_name" type="text" class="addTeam"
+								placeholder="Enter a Team Name"> <br> <input
+								type="submit" class="submitTeam" value="Register Team">
+						</form>
 						<div class="columns">
 							<div class="column">
 								<p class="teamtitlestyle">View Available Teams</p>
 								<br>
+								<table>
 								<tr th:each="team: ${availableTeams}" th:class="teamstyle">
-									<a th:text="${team?.team_name}"
+									<td><a th:text="${team?.team_name}"
 										th:href="@{/team/(team_id = ${team.team_id})}"
-										th:class="teamstyle" />
-									<br>
+										th:class="teamstyle"></a></td>
 								</tr>
+								</table>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div th:unless="${hasTeam}">
-			<div class="columns">
-				<div class="column">
-					<p class="teamtitlestyle">View Available Teams</p>
-					<br>
-					<table>
-						<tr th:each="team: ${availableTeams}" th:class="teamstyle">
-							<td><a th:text="${team?.team_name}"
-								th:href="@{/team/(team_id = ${team.team_id})}"
-								th:class="teamstyle"></a></td>
-						</tr>
-					</table>
 
-					<div th:unless="${isStudent}">
-						<div class="columns">
-							<div class="column">
-								<p class="teamtitlestyle">All Teams</p>
-								<br>
-								<tr th:each="team: ${sectionTeams}" th:class="teamstyle">
-									<p>
-										- <a th:text="${team?.team_name}"
-											th:href="@{/team/(team_id = ${team.team_id})}"
-											th:class="teamstyle" />
-									</p>
-									<br>
-								</tr>
-							</div>
-						</div>
-
-					</div>
-
-				</div>
-
-			</div>
-		</div>
 		<div th:unless="${isStudent}">
 			<div class="columns">
 				<div class="column">
 					<p class="teamtitlestyle">All Teams</p>
 					<br>
 					<tr th:each="team: ${sectionTeams}" th:class="teamstyle">
-						<a th:text="${team?.team_name}"
-							th:href="@{/team/(team_id = ${team.team_id})}"
-							th:class="teamstyle" />
+						<p>
+							<a th:text="${team?.team_name}"
+								th:href="@{/team/(team_id = ${team.team_id})}"
+								th:class="teamstyle"></a>
+						</p>
 						<br>
 					</tr>
 				</div>
 			</div>
-		</div>
 
-		<div class="column border">
-			<p class="discussion">Discussion</p>
-			<p></p>
-			<a href="thread" class="teamstyle">???thread</a>
 		</div>
 	</div>
 </body>
