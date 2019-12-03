@@ -7,8 +7,10 @@
 }
 
 .border{
-	border: 2px solid black;
-	height: 70%;
+	background-color: #86d3ee;
+	color: #000000;
+	padding-left: 2%;
+	padding-right: 2%;
 }
 
 .commentpadding{
@@ -20,5 +22,4 @@
 .padding{
 	padding-top: 1%;
 	padding-left: 6%;
-	padding-right: 5%;
 }
