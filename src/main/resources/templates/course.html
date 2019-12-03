@@ -2,80 +2,76 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<title>Course</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	
-	
-	<link href="/bulma.css" rel="stylesheet" />
-	<link href="/global.css" rel="stylesheet" />
-	<link href="/course.css" rel="stylesheet" />
+<title>Course</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+
+<link href="/bulma.css" rel="stylesheet" />
+<link href="/global.css" rel="stylesheet" />
+<link href="/course.css" rel="stylesheet" />
 </head>
 
 <body>
-	<nav class = "navbar navbackground">
-		<div class="navbar-start">
-			<a href="/" class="navbar-item navstyle">
-		      <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
-		    </a>
-		</div>
-		
-		<div class="navbar-end">
-		        <a href="login" class="nav-item navstyle">
-		      		login
-		    	</a>
-		    	<a href="logout" class="nav-item navstyle">
-		      		logout
-		    	</a>
-		 </div>
-		
-	</nav>
-	
+	<div th:insert="navbar :: navbar"></div>
+
 	<div>
 
-		<a th:text="${courseInfo}" th:class="title"/><br>
+		<a th:text="${courseInfo}" th:class="title"></a><br>
 		<div class="columns padding">
-		  	<div class="column">
+			<div class="column">
 				<div th:if="${isStudent}">
+					<form action="#" method="post" th:action="@{/create-team}"
+						th:object="${Team}" autocomplete="off">
+						<input th:name="team_name" type="text" class="addTeam"
+							placeholder="Enter a Team Name"> <br> <input
+							type="submit" class="submitTeam" value="Register Team">
+					</form>
+
 					<div th:if="${hasTeam}">
-						<div class="columns">
-							<div class="column">
-								<p class="teamtitlestyle">Your Teams</p>
-								<br>
-								<a  th:text="${team?.team_name}" th:href="@{/team/(team_id = ${team.team_id})}" th:class="teamstyle" /><br>
-							</div>
-						</div>
-					</div>
-					<div th:unless="${hasTeam}">
-					 <div class="columns">
-						<div class="column">
-							 <p class="teamtitlestyle">View Available Teams</p>
-							 <br>
-							<tr th:each="team: ${availableTeams}" th:class="teamstyle">
-								<a  th:text="${team?.team_name}" th:href="@{/team/(team_id = ${team.team_id})}" th:class="teamstyle" /><br>
-							</tr>
-						 </div>
-					 </div>
+						<p class="teamtitlestyle">Your Teams</p>
+						<br> <a th:text="${team?.team_name}"
+							th:href="@{/team/(team_id = ${team.team_id})}"
+							th:class="teamstyle"></a><br>
 					</div>
 				</div>
-				<div th:unless="${isStudent}">
-					<div class="columns">
-						<div class="column">
-							<p class="teamtitlestyle">All Teams</p>
-							<br>
-							<tr th:each="team: ${sectionTeams}" th:class="teamstyle">
-								<a  th:text="${team?.team_name}" th:href="@{/team/(team_id = ${team.team_id})}" th:class="teamstyle" /><br>
-							</tr>
-						</div>
-					</div>
+			</div>
+		</div>
+		<div th:unless="${hasTeam}">
+			<div class="columns">
+				<div class="column">
+					<p class="teamtitlestyle">View Available Teams</p>
+					<br>
+					<table>
+						<tr th:each="team: ${availableTeams}" th:class="teamstyle">
+							<td><a th:text="${team?.team_name}"
+								th:href="@{/team/(team_id = ${team.team_id})}"
+								th:class="teamstyle"></a></td>
+						</tr>
+					</table>
 				</div>
-		 	</div>
-		 	<div class="column border"> 
-		     <p class="discussion">Discussion</p>
-		     <p></p>
-		     <a href="thread" class="teamstyle">???thread</a>
-		 	</div>
-		 </div>
+			</div>
+		</div>
 	</div>
+	<div th:unless="${isStudent}">
+		<div class="columns">
+			<div class="column">
+				<p class="teamtitlestyle">All Teams</p>
+				<br>
+				<tr th:each="team: ${sectionTeams}" th:class="teamstyle">
+					<a th:text="${team?.team_name}"
+						th:href="@{/team/(team_id = ${team.team_id})}"
+						th:class="teamstyle" /><br>
+				</tr>
+			</div>
+		</div>
+	</div>
+
+	<div class="column border">
+		<p class="discussion">Discussion</p>
+		<p></p>
+		<a href="thread" class="teamstyle">???thread</a>
+	</div>
+
 </body>
 
 </html>

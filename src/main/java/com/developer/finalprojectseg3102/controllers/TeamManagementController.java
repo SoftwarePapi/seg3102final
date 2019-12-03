@@ -26,7 +26,7 @@ public class TeamManagementController extends BaseController{
 
 
     @RequestMapping(value = "/setup-teams")
-    public String createTeam(@ModelAttribute int min, int max, Timestamp creation_date, Model model, HttpSession session) throws Exception {
+    public String setupTeams(@ModelAttribute int min, int max, Timestamp creation_date, Model model, HttpSession session) throws Exception {
         //Also check if the user is admin: current_user.isAdmin()
 
         this.min = min;
@@ -35,9 +35,36 @@ public class TeamManagementController extends BaseController{
 
         return "course";
     }
+    
+    @RequestMapping(value = "/create-team")
+    public String createTeam(@ModelAttribute Team team, Model model, HttpSession session) throws Exception {
+        //Also check if the user is admin: current_user.isAdmin()
+    	if (isLoggedIn(session) && !session.getAttribute("user").equals(null)) {
+    		
+    		Team createdTeam = new Team();
+    		User requestedUser = (User)session.getAttribute("user");
+    		
+    		createdTeam.setTeam_name(team.getTeam_name());
+    		createdTeam.setMax_capacity(5);
+    		createdTeam.setMin_capacity(1);
+    		createdTeam.setStatus("incomplete");
+    		
+    		createdTeam.setSection_id(Long.parseLong((String) session.getAttribute("section_id")));
+    		createdTeam.setCaptain_id(requestedUser.getUser_id());
+    		
+    		TeamDAO.create(createdTeam);
+    		
+    		//return "course/?section_id=" + session.getAttribute("section_id");
+    		return "redirect:/course/?section_id=" + session.getAttribute("section_id");
+    		
+    	} else {
+    		return "login";
+    	}
+    }
 
     @RequestMapping(value="/course")
     public String getCoursePage(Model model, HttpSession session) {
+    	//session.setAttribute("Section", );
         return "course";
 
     }

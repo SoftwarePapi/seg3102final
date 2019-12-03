@@ -29,6 +29,9 @@ public class CourseManagementController extends BaseController {
         Boolean isStudent = false;
 
         section = SectionDAO.retrieve(Long.parseLong(section_id));
+        //temporary fix, add section to session every time the section is visited -> for team create
+        session.setAttribute("section_id", section_id);
+        
         model.addAttribute("section", section);
         model.addAttribute("courseInfo", sectionFullName(Long.parseLong(section_id)));
         User current_user = (User) session.getAttribute("user");
