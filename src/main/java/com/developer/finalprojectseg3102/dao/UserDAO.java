@@ -48,8 +48,6 @@ public class UserDAO extends BaseDAO {
 		str.append("\"password\"" + ":" + "\"" + user.getPassword() + "\"}");
 
 		String jsonInputString = str.toString();
-		System.out.println(jsonInputString);
-
 		con.getOutputStream().write(jsonInputString.getBytes("UTF-8"));
 
 		try (BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"))) {
@@ -116,10 +114,6 @@ public class UserDAO extends BaseDAO {
 				rawJson += sc.nextLine();
 			}
 			sc.close();
-
-			System.out.print("Raw Jason: ");
-			System.out.println(rawJson);
-
 			JSONParser parser = new JSONParser();
 			JSONArray jsonArray = (JSONArray) parser.parse(rawJson);
 

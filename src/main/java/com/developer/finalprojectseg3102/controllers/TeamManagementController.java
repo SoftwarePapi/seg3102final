@@ -146,7 +146,7 @@ public class TeamManagementController extends BaseController{
         User user = UserDAO.retrieve(Long.parseLong(user_id));
         TeamDAO.addTeamMember(user.getUser_id(), current_team.getTeam_id());
 
-        return "team";
+        return "course";
 
     }
 

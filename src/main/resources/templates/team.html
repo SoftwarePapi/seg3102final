@@ -26,19 +26,20 @@
 						<p>Join Requests</p>
 
 						<div class="column border">
-						<table>
-							<tr th:each="student: ${joinRequests}">
-								<td><a th:text="${student.key}"
-									th:href="@{/confirm-join/(user_id = ${student.value.user_id})}"
-									th:class="teamstyle"></a></td>
-								<br>
-								</table>
+							<table>
+								<tr th:each="student: ${joinRequests}">
+									<td><a th:text="${student.key}"
+										th:href="@{/confirm-join/(user_id = ${student.value.user_id})}"
+										th:class="teamstyle"></a></td>
+									<br>
+							</table>
 							</tr>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+
 		<div class="columns">
 			<div class="column">
 				<p class="teamstyle buttonpadding">Team Members</p>
@@ -55,6 +56,30 @@
 								th:object="${team}" autocomplete="off">
 								<input type="submit" value="Request To Join" class="button">
 							</form>
+						</div>
+					</div>
+
+				</div>
+				<div class="columns padding">
+					<div class="column border">
+						<tr th:each="member: ${members}">
+							<td th:text="${member}" /><br>
+						</tr>
+					</div>
+				</div>
+				<div class="columns padding">
+					<div class="column border">
+						<a th:href="@{/thread}" th:text="${thread.title}">Thread</a>
+						<div class="columns">
+							<div class="column">
+								<p th:text="${thread.body_text}">Body</p>
+								<div class="columns commentpadding">
+									<div class="column border">
+										<p th:text="${comment.body_text}">comment 1</p>
+									</div>
+								</div>
+								<br>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -90,5 +115,5 @@
 	</div>
 	<br>
 	<br>
-
+	</div>
 </body>
