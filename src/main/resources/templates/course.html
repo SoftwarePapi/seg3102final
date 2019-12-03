@@ -14,11 +14,12 @@
 <body>
 	<div th:insert="navbar :: navbar"></div>
 	<div>
-		<a th:text="${courseInfo}" class="teamSetup" th:class="title"></a> <a th:unless="${isStudent}" 
-		th:href="@{/setup-teams}" class=" column teamSetup">Setup Team Parameters</a>
+		<a th:text="${courseInfo}" class="teamSetup" th:class="title"></a> 
+		<a th:unless="${isStudent}" href="../setup-team"
+			class=" column teamSetup">Setup Team Parameters</a>
 		<hr>
 
-				
+
 		<div class="columns padding">
 			<div class="column">
 				<div th:if="${isStudent}">
@@ -51,11 +52,11 @@
 								<p class="teamtitlestyle">View Available Teams</p>
 								<br>
 								<table>
-								<tr th:each="team: ${availableTeams}" th:class="teamstyle">
-									<td><a th:text="${team?.team_name}"
-										th:href="@{/team/(team_id = ${team.team_id})}"
-										th:class="teamstyle"></a></td>
-								</tr>
+									<tr th:each="team: ${availableTeams}" th:class="teamstyle">
+										<td><a th:text="${team?.team_name}"
+											th:href="@{/team/(team_id = ${team.team_id})}"
+											th:class="teamstyle"></a></td>
+									</tr>
 								</table>
 							</div>
 						</div>
@@ -64,37 +65,21 @@
 				<div th:unless="${isStudent}">
 					<div class="columns">
 						<div class="column">
-							<a href="/setup-team" class="teamstyle">Setup Team Parameter</a>
-						</div>
-						<br><br>
-						<div class="column">
 							<p class="teamtitlestyle">All Teams</p>
 							<br>
 							<tr th:each="team: ${sectionTeams}" th:class="teamstyle">
-								<a  th:text="${team?.team_name}" th:href="@{/team/(team_id = ${team.team_id})}" th:class="teamstyle" /><br>
+								<p>
+									<a th:text="${team?.team_name}"
+										th:href="@{/team/(team_id = ${team.team_id})}"
+										th:class="teamstyle"></a>
+								</p>
+								<br>
 							</tr>
+						</div>
+					</div>
 
-			</div>
-		</div>
-
-		<div th:unless="${isStudent}">
-			<div class="columns">
-				<div class="column">
-					<p class="teamtitlestyle">All Teams</p>
-					<br>
-					<tr th:each="team: ${sectionTeams}" th:class="teamstyle">
-						<p>
-							<a th:text="${team?.team_name}"
-								th:href="@{/team/(team_id = ${team.team_id})}"
-								th:class="teamstyle"></a>
-						</p>
-						<br>
-					</tr>
 				</div>
 			</div>
-
-		</div>
-	</div>
 </body>
 
 </html>

@@ -1,19 +1,27 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<meta charset="UTF-8">
+<title>Title</title>
+
+<link href="/global.css" rel="stylesheet" />
+<link href="/navbar.css" rel="stylesheet" />
+<link href="setupteam.css" rel="stylesheet"/>
 </head>
+
+
 <body>
-<div th:insert="navbar :: navbar"></div>
 
-    <form action="#" method="post" th:action="@{/set-params}" th:object="${team}" autocomplete="off">
-        <input type="number" min="1" th:name="min_capacity" placeholder="Minimum Capacity">
-        <input type="number" min="1" th:name="max_capacity" placeholder="Maximum Capacity">
-        <input type="date" placeholder="Team Creation Deadline">
+	<div th:insert="navbar :: navbar"></div>
 
-        <input type="submit" value="Setup Teams">
-    </form>
+	<form action="#" method="post" th:action="@{/set-params}"
+		th:object="${team}" autocomplete="off">
+		<input type="number" min="1" th:name="min_capacity"
+			placeholder="Minimum Capacity"> <input type="number" min="1"
+			th:name="max_capacity" placeholder="Maximum Capacity"> <input
+			type="date" placeholder="Team Creation Deadline"> <input
+			type="submit" class="setupsubmit" value="Setup Teams">
+	</form>
 
 </body>
 </html>

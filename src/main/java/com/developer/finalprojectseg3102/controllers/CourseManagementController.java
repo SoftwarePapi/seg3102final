@@ -1,17 +1,22 @@
 package com.developer.finalprojectseg3102.controllers;
 
-import com.developer.finalprojectseg3102.dao.*;
-import com.developer.finalprojectseg3102.models.*;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpSession;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.developer.finalprojectseg3102.controllers.BaseController.isLoggedIn;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.developer.finalprojectseg3102.dao.SectionDAO;
+import com.developer.finalprojectseg3102.dao.TeamDAO;
+import com.developer.finalprojectseg3102.dao.ThreadDAO;
+import com.developer.finalprojectseg3102.models.Section;
+import com.developer.finalprojectseg3102.models.Team;
+import com.developer.finalprojectseg3102.models.User;
 
 @Controller
 public class CourseManagementController extends BaseController {
