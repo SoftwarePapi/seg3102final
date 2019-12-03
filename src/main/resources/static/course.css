@@ -26,7 +26,8 @@
 }
 
 .border{
-	border: 2px solid black;
+	background-color: #86d3ee;
+	color: #000000;
 	height: 70%;
 }
 
@@ -50,6 +51,14 @@
 
 .teamSetup {
 	text-align: center;
+}
+
+.t-border{
+	background-color: #86d3ee;
+	color: #000000;
+	width: 30%;
+	padding-left: 2%;
+	padding-right: 2%;
 }
 
 .submitTeam {

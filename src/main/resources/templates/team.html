@@ -22,23 +22,38 @@
 							Captain: <span th:text="${captain}"></span>
 						</p>
 					</div>
-					<div th:if="${isCaptain}">
-						<div class="column">
-							<p>Join Requests</p>
+				</div>
+			</div>
+		</div>
+		<div class="columns">
+			<div class="column padding">
+				<div th:if="${isCaptain}">
 
-							<div class="column border">
-								<table>
+							<p class="textcolour">Join Requests</p>
+
+							<div class="column t-border">
+								
 									<tr th:each="student: ${joinRequests}">
 										<td><a th:text="${student.key}"
 											th:href="@{/confirm-join/(user_id = ${student.value.user_id})}"
 											th:class="teamstyle"></a></td>
 										<br>
 									</tr>
-								</table>
+								
+						</div>
+					</div>
+					<div th:if="${isStudent}">
+						<div th:unless="${hasTeam}">
+							<div  th:if="${hasRequested}">
+								<button type="button" class="greenButton">Join Request Sent</button>
+							</div>
+							<div th:unless="${hasRequested}">
+							<form action="#" method="post" th:action="@{/join-team}" th:object="${team}" autocomplete="off">
+								<input type="submit" value="Request To Join" class="requestSent">
+							</form>
 							</div>
 						</div>
 					</div>
-				</div>
 			</div>
 		</div>
 
@@ -47,22 +62,6 @@
 				<p class="teamstyle buttonpadding">Team Members</p>
 				<button type="button">Add Members</button>
 				<button type="button">Edit</button>
-
-				<div th:if="${isStudent}">
-					<div th:unless="${hasTeam}">
-						<div th:if="${hasRequested}">
-							<button type="button" class="greenButton">Join Request
-								Sent</button>
-						</div>
-						<div th:unless="${hasRequested}">
-							<form action="#" method="post" th:action="@{/join-team}"
-								th:object="${team}" autocomplete="off">
-								<input type="submit" value="Request To Join" class="button">
-							</form>
-						</div>
-					</div>
-
-				</div>
 				<div class="columns padding">
 					<div class="column border">
 						<tr th:each="member: ${members}">
@@ -73,42 +72,19 @@
 				</div>
 				<div class="columns padding">
 					<div class="column border">
+					<p>Threads</p>
 						<a th:href="@{/thread}" th:text="${thread.title}">Thread</a>
 						<div class="columns">
 							<div class="column">
 								<p th:text="${thread.body_text}">Body</p>
 								<div class="columns commentpadding">
-									<div class="column border">
+									<div class="column commentborder">
 										<p th:text="${comment.body_text}">comment 1</p>
 									</div>
 								</div>
 								<br>
 							</div>
 						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="columns padding">
-			<div class="column border">
-				<tr th:each="member: ${members}">
-					<td th:text="${member}" />
-					<br>
-				</tr>
-			</div>
-		</div>
-		<div class="columns padding">
-			<div class="column border">
-				<a th:href="@{/thread}" th:text="${thread.title}">Thread</a>
-				<div class="columns">
-					<div class="column">
-						<p th:text="${thread.body_text}">Body</p>
-						<div class="columns commentpadding">
-							<div class="column border">
-								<p th:text="${comment.body_text}">comment 1</p>
-							</div>
-						</div>
-						<br>
 					</div>
 				</div>
 			</div>
