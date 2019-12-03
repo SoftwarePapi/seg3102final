@@ -121,6 +121,8 @@ public class TeamManagementController extends BaseController{
         Comment comment = CommentDAO.retrieve(Long.valueOf(1));
         model.addAttribute("thread", thread);
         model.addAttribute("comment", comment);
+        
+        session.setAttribute("team_id", team_id);
         return "team";
     }
 
@@ -142,7 +144,7 @@ public class TeamManagementController extends BaseController{
         model.addAttribute("hasTeam" , session.getAttribute("hasTeam"));
         model.addAttribute("isStudent" , session.getAttribute("isStudent"));
 
-        return "team";
+        return "redirect:/team/?team_id=" + session.getAttribute("team_id");
     }
 
     @RequestMapping(value = "/confirm-join", params = "user_id")
