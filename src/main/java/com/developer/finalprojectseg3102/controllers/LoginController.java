@@ -40,7 +40,7 @@ public class LoginController extends BaseController {
 
 				if (user.getEmail() != null && user.getPassword() != null) {
 					for (int i = 0; i < userList.size(); i++) {
-						if (user.getEmail().equals(userList.get(i).getEmail())
+						if (user.getEmail().toLowerCase().equals(userList.get(i).getEmail().toLowerCase())
 								&& user.getPassword().equals(userList.get(i).getPassword())) {
 							session.setAttribute("loggedIn", true);
 							User loggedInUser = new User();
@@ -129,7 +129,19 @@ public class LoginController extends BaseController {
 		}
 	}
 
-	public List<Section> getStudentSections(long user_id) throws Exception {
-		return UserDAO.retrieveStudentSections(user_id);
+	@RequestMapping(value = "/logout")
+	public String logout(Model model, HttpSession session, @ModelAttribute User user) {
+		if (isLoggedIn(session )) {
+			session.removeAttribute("User");
+			session.removeAttribute("loggedIn");
+			return "/login";
+		} else {
+			/*
+			 * any place that allows the log out option should already have a user logged in and a 
+			 * session boolean object called loggedIn, so if you're not logged in and try to log out,
+			 * that's pretty illegal, my guy
+			 */
+			return "error";
+		}
 	}
 }

@@ -1,13 +1,7 @@
 package com.developer.finalprojectseg3102.controllers;
 
-import com.developer.finalprojectseg3102.dao.CourseDAO;
-import com.developer.finalprojectseg3102.dao.SectionDAO;
-import com.developer.finalprojectseg3102.dao.TeamDAO;
-import com.developer.finalprojectseg3102.dao.UserDAO;
-import com.developer.finalprojectseg3102.models.Course;
-import com.developer.finalprojectseg3102.models.Section;
-import com.developer.finalprojectseg3102.models.Team;
-import com.developer.finalprojectseg3102.models.User;
+import com.developer.finalprojectseg3102.dao.*;
+import com.developer.finalprojectseg3102.models.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +23,9 @@ public class CourseManagementController extends BaseController {
         Boolean isStudent = false;
 
         section = SectionDAO.retrieve(Long.parseLong(section_id));
+        //temporary fix, add section to session every time the section is visited -> for team create
+        session.setAttribute("section_id", section_id);
+        
         model.addAttribute("section", section);
         model.addAttribute("courseInfo", sectionFullName(Long.parseLong(section_id)));
         User current_user = (User) session.getAttribute("user");
@@ -75,8 +72,10 @@ public class CourseManagementController extends BaseController {
         session.setAttribute("hasTeam", hasTeam);
         session.setAttribute("isStudent", isStudent);
 
+        // Threads and comments
+        com.developer.finalprojectseg3102.models.Thread thread = ThreadDAO.retrieve(Long.valueOf(2));
+        model.addAttribute("thread", thread);
+
         return "course";
     }
-
-
 }

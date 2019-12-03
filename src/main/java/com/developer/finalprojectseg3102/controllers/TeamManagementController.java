@@ -26,9 +26,9 @@ public class TeamManagementController extends BaseController{
         return "setup-team";
     }
 
+
     @RequestMapping(value = "/set-params")
     public String setParams(@ModelAttribute Team team, Model model, HttpSession session) throws Exception {
-
         Singleton param = Singleton.getInstance();
         param.min = team.getMin_capacity();
         param.max = team.getMax_capacity();
@@ -36,10 +36,37 @@ public class TeamManagementController extends BaseController{
         System.out.println(param.max);
         return "setup-team";
     }
+    
+    @RequestMapping(value = "/create-team")
+    public String createTeam(@ModelAttribute Team team, Model model, HttpSession session) throws Exception {
+        //Also check if the user is admin: current_user.isAdmin()
+    	if (isLoggedIn(session) && !session.getAttribute("user").equals(null)) {
+    		
+    		Team createdTeam = new Team();
+    		User requestedUser = (User)session.getAttribute("user");
+    		
+    		createdTeam.setTeam_name(team.getTeam_name());
+    		createdTeam.setMax_capacity(5);
+    		createdTeam.setMin_capacity(1);
+    		createdTeam.setStatus("incomplete");
+    		
+    		createdTeam.setSection_id(Long.parseLong((String) session.getAttribute("section_id")));
+    		createdTeam.setCaptain_id(requestedUser.getUser_id());
+    		
+    		TeamDAO.create(createdTeam);
+    		
+    		//return "course/?section_id=" + session.getAttribute("section_id");
+    		return "redirect:/course/?section_id=" + session.getAttribute("section_id");
+    		
+    	} else {
+    		return "login";
+    	}
+    }
 
 
     @RequestMapping(value="/course")
     public String getCoursePage(Model model, HttpSession session) {
+    	//session.setAttribute("Section", );
         return "course";
 
     }
@@ -121,7 +148,7 @@ public class TeamManagementController extends BaseController{
         User user = UserDAO.retrieve(Long.parseLong(user_id));
         TeamDAO.addTeamMember(user.getUser_id(), current_team.getTeam_id());
 
-        return "team";
+        return "course";
 
     }
 

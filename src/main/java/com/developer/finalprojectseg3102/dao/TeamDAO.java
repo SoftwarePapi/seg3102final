@@ -20,7 +20,42 @@ import java.util.Scanner;
  */
 public class TeamDAO extends BaseDAO{
 
+	public static void create(Team team) throws Exception {
+		URL url = new URL(BASEURLV1 + "teams/");
 
+		StringBuilder str = new StringBuilder();
+
+		HttpURLConnection con = (HttpURLConnection) url.openConnection();
+		con.setDoOutput(true);
+		con.setRequestMethod("POST");
+		con.setRequestProperty("Content-Type", "application/json; UTF-8");
+		con.setRequestProperty("Accept", "application/json");
+		con.setDoOutput(true);
+		
+		str.append("{");
+		str.append("\"team_name\"" + ":" + "\"" + team.getTeam_name() + "\",");
+		str.append("\"status\"" + ":" + "\"" + team.getStatus() + "\",");
+		str.append("\"min_capacity\"" + ":" + team.getMin_capacity() + ",");
+		str.append("\"max_capacity\"" + ":" + team.getMax_capacity() + ",");
+		str.append("\"captain\"" + ":" + team.getCaptain_id() + ",");
+		str.append("\"section_id\"" + ":" + team.getSection_id());
+		str.append("}");
+
+		String jsonInputString = str.toString();
+		System.out.println(jsonInputString);
+
+		con.getOutputStream().write(jsonInputString.getBytes("UTF-8"));
+
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"))) {
+			StringBuilder response = new StringBuilder();
+			String responseLine = null;
+			while ((responseLine = br.readLine()) != null) {
+				response.append(responseLine.trim());
+			}
+		}
+		con.disconnect();
+	}
+	
     public static Team retrieve(Long id) throws Exception{
 
         URL url = new URL(BASEURLV1 + "teams/" + id.toString()+"/?format=json");
