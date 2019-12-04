@@ -92,12 +92,10 @@ public class LoginController extends BaseController {
 	@RequestMapping(value = "/signup")
 	public String showSignupPage(Model model, HttpSession session) {
 
-		if (session.getAttribute("user") == null) {
-			return "signup";
-		} else if (isLoggedIn(session)) {
+		if (isLoggedIn(session)) {
 			return "index";
 		} else {
-			return "error";
+			return "signup";
 		}
 	}
 
